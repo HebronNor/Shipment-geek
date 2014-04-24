@@ -30,7 +30,14 @@ namespace ShipmentGeek
         public static List<ShipmentInfo> List = new List<ShipmentInfo>();
 
         [XmlIgnore]
-        public static int GetID { get { return List.Max(f => f.ID) + 1; } }
+        public static int GetID 
+        { 
+            get 
+            {
+                if (List.Count > 0) return List.Max(f => f.ID) + 1;
+                else return 1;
+            } 
+        }
 
         [XmlIgnore]
         public static Comparison<ShipmentInfo> IdComparison = delegate(ShipmentInfo s1, ShipmentInfo s2) { return s2.ID.CompareTo(s1.ID); };

@@ -25,6 +25,7 @@ namespace ShipmentGeek
             Debug.AutoFlush = true;
 
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            Application.ThreadException += Application_ThreadException;
 
             FileHandling.BackupShipmentDatabase();
         }
@@ -308,6 +309,12 @@ namespace ShipmentGeek
         void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             Exception exp = (Exception)e.ExceptionObject;
+            MsgManager.LaunchExceptionReporter(exp);
+        }
+
+        void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            Exception exp = (Exception)e.Exception;
             MsgManager.LaunchExceptionReporter(exp);
         }
 

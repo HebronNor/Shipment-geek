@@ -11,9 +11,14 @@ namespace ShipmentGeek
     {
         public static void BackupShipmentDatabase()
         {
-            Directory.CreateDirectory(Var.FolderInfo.Backup);
-            File.Copy(Var.FileInfo.ShipmentFile, string.Format("{0}\\{1}.xml", Var.FolderInfo.Backup, Var.DateTimeStr), true);
-            FileHandling.DeleteOldFiles(Var.FolderInfo.Backup, "xml", (x, y) => x.CreationTime < y.AddDays(-7));
+            if (File.Exists(Var.FileInfo.ShipmentFile))
+            {
+                Directory.CreateDirectory(Var.FolderInfo.Backup);
+                File.Copy(Var.FileInfo.ShipmentFile, string.Format("{0}\\{1}.xml", Var.FolderInfo.Backup, Var.DateTimeStr), true);
+            }
+
+            if (Directory.Exists(Var.FolderInfo.Backup))
+                FileHandling.DeleteOldFiles(Var.FolderInfo.Backup, "xml", (x, y) => x.CreationTime < y.AddDays(-7));
         }
 
         public delegate bool FileTimeCheckDelegate(FileInfo i, DateTime y);
