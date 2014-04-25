@@ -15,6 +15,10 @@ namespace ShipmentGeek
         public bool Outgoing { set; get; }
         public string Name { set; get; }
         public DateTime Date { set; get; }
+        public string Value { set; get; }
+        public string URL { set; get; }
+        public string Carrier { set; get; }
+        public string Tracking { set; get; }
         public string Comment { set; get; }
         public bool Received { set; get; }
         public bool Missing { set; get; }
@@ -40,6 +44,9 @@ namespace ShipmentGeek
         }
 
         [XmlIgnore]
+        public TimeSpan Days { get { return DateTime.Now.Subtract(this.Date); } }
+
+        [XmlIgnore]
         public static Comparison<ShipmentInfo> IdComparison = delegate(ShipmentInfo s1, ShipmentInfo s2) { return s2.ID.CompareTo(s1.ID); };
 
         [XmlIgnore]
@@ -47,6 +54,9 @@ namespace ShipmentGeek
 
         [XmlIgnore]
         public static Comparison<ShipmentInfo> DateComparison = delegate(ShipmentInfo s1, ShipmentInfo s2) { return s1.Date.CompareTo(s2.Date); };
+
+        [XmlIgnore]
+        public static Comparison<ShipmentInfo> DaysComparison = delegate(ShipmentInfo s1, ShipmentInfo s2) { return s1.Days.CompareTo(s2.Days); };
 
         [XmlIgnore]
         public static Comparison<ShipmentInfo> ItemComparison = delegate(ShipmentInfo s1, ShipmentInfo s2) { return s2.Items.Sum(f => f.Count).CompareTo(s1.Items.Sum(f => f.Count)); };

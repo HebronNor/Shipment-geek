@@ -51,6 +51,10 @@ namespace ShipmentGeek
                 shipmentInfo.Outgoing = radOutgoing.Checked;
                 shipmentInfo.Name = txtName.Text;
                 shipmentInfo.Date = dateTimePicker.Value;
+                shipmentInfo.Value = txtValue.Text;
+                shipmentInfo.URL = txtURL.Text;
+                shipmentInfo.Carrier = (cmbCarrier.SelectedItem != null ? cmbCarrier.SelectedItem.ToString() : string.Empty);
+                shipmentInfo.Tracking = txtTracking.Text;
                 shipmentInfo.Comment = txtComment.Text;
                 shipmentInfo.Received = chkReceived.Checked;
                 shipmentInfo.Missing = chkMissing.Checked;
@@ -83,6 +87,11 @@ namespace ShipmentGeek
             ShipmentInfo.List.Sort(ShipmentInfo.DateComparison);
 
             PopulateLists();
+
+            Carrier.List.Sort(Carrier.NameComparison);
+            foreach (Carrier carrier in Carrier.List)
+                cmbCarrier.Items.Add(carrier.Name);
+            cmbCarrier.Items.Add("Other");
         }
 
         private void Save()
@@ -100,7 +109,13 @@ namespace ShipmentGeek
 
             foreach (ShipmentInfo shipment in ShipmentInfo.List)
             {
-                ListViewItem item = new ListViewItem(new[] { shipment.ID.ToString(), shipment.Name, shipment.Date.ToString("d"), shipment.Items.Sum(f => f.Count).ToString() });
+                ListViewItem item = new ListViewItem(new[] { 
+                    shipment.ID.ToString(),
+                    shipment.Name,
+                    shipment.Date.ToString("d"),
+                    (!shipment.Missing && !shipment.Received ? shipment.Days.ToString("%d") : "-"),
+                    shipment.Items.Sum(f => f.Count).ToString()
+                });
 
                 if (chkShowAll.Checked || (!chkShowAll.Checked && !shipment.Received && !shipment.Missing))
                 {
@@ -125,6 +140,10 @@ namespace ShipmentGeek
                 radOutgoing.Checked = si.Outgoing;
                 txtName.Text = si.Name;
                 dateTimePicker.Value = si.Date;
+                txtValue.Text = si.Value;
+                txtURL.Text = si.URL;
+                cmbCarrier.SelectedItem = si.Carrier;
+                txtTracking.Text = si.Tracking;
                 txtComment.Text = si.Comment;
                 chkReceived.Checked = si.Received;
                 chkMissing.Checked = si.Missing;
@@ -135,6 +154,10 @@ namespace ShipmentGeek
 
                 selectedShipment = si.ID;
                 lblStatStrip.Text = string.Format("Selected: {0} - {1}", (radIncoming.Checked ? "In" : "Out"), si.Name);
+
+                grpItems.Enabled = true;
+                cmdURLopen.Enabled = true;
+                cmdTrack.Enabled = true;
             }
             else
             {
@@ -183,6 +206,11 @@ namespace ShipmentGeek
             radOutgoing.Checked = false;
             txtName.Text = string.Empty;
             dateTimePicker.Value = DateTime.Today;
+            txtValue.Text = string.Empty;
+            txtURL.Text = string.Empty;
+            cmbCarrier.SelectedItem = null;
+            cmbCarrier.Text = string.Empty;
+            txtTracking.Text = string.Empty;
             txtComment.Text = string.Empty;
             chkReceived.Checked = false;
             chkMissing.Checked = false;
@@ -193,6 +221,10 @@ namespace ShipmentGeek
 
             selectedShipment = 0;
             errProvider.Clear();
+
+            grpItems.Enabled = false;
+            cmdURLopen.Enabled = false;
+            cmdTrack.Enabled = false;
         }
 
         private void cmdClear_Click(object sender, EventArgs e)
@@ -323,7 +355,8 @@ namespace ShipmentGeek
             if (e.Column == 0) ShipmentInfo.List.Sort(ShipmentInfo.IdComparison);
             if (e.Column == 1) ShipmentInfo.List.Sort(ShipmentInfo.NameComparison);
             if (e.Column == 2) ShipmentInfo.List.Sort(ShipmentInfo.DateComparison);
-            if (e.Column == 3) ShipmentInfo.List.Sort(ShipmentInfo.ItemComparison);
+            if (e.Column == 3) ShipmentInfo.List.Sort(ShipmentInfo.DaysComparison);
+            if (e.Column == 4) ShipmentInfo.List.Sort(ShipmentInfo.ItemComparison);
 
             PopulateLists();
         }
@@ -334,6 +367,41 @@ namespace ShipmentGeek
             if (e.Column == 1) siGlobal.Items.Sort(ShipmentItem.TextComparison);
 
             PutShipmentItems(siGlobal);
+        }
+
+        private void cmdURLopen_Click(object sender, EventArgs e)
+        {
+            string url = txtURL.Text;
+            if (!url.StartsWith("http://")) url = "http://" + url;
+
+            try
+            {
+                if (!string.IsNullOrEmpty(txtURL.Text)) Process.Start(url);
+            }
+            catch (Exception exp)
+            {
+                MsgManager.Show(exp.Message, "Error lauching URL", MessageBoxIcon.Error);
+            }
+        }
+
+        private void cmdTrack_Click(object sender, EventArgs e)
+        {
+            if (cmbCarrier.SelectedItem != null)
+            {
+                if (cmbCarrier.SelectedItem.ToString() != "Other")
+                {
+                    string url = Carrier.List.FirstOrDefault(f => f.Name == cmbCarrier.SelectedItem.ToString()).TrackURL;
+
+                    try
+                    {
+                        if (!string.IsNullOrEmpty(txtTracking.Text)) Process.Start(string.Format(url, txtTracking.Text));
+                    }
+                    catch (Exception exp)
+                    {
+                        MsgManager.Show(exp.Message, "Error lauching tracking", MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
 
     }
