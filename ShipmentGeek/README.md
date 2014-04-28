@@ -5,7 +5,7 @@ Latest **release, with binary files**, can be found [here](https://github.com/He
 Shipment geek is a super light database manager for keeping track of incoming and outgoing shipments. Date, comment, items and whether the shipment has been received or lost can be stored, giving a nice overview of all shipments in transit.
 
 ## Screenshots
-<img src="https://0vpggq.bn1303.livefilestore.com/y2pA3KqOCQTxp_dFNRNCLF7GErAAuHInYtpApBlzd13GQrHO4tNHUxz1GzNj8qA8GKYzX2JwLn1WwtqXmk7mUFrhx7wZdnpN4xKrSkBwmkopwo/ShipmentGeek_Screen1.png?psid=1" width="400">
+<img src="https://0vpggq.bn1303.livefilestore.com/y2p1ZxAvTut43d--_IonAejIlmM2GComOuM3Gw1bv4mo5_ixxdQCF3sm10tH0LozBOGcS85HR8QB0TUAOFeF7BpHpZAzuixNAOjn6XZ3dz_iDM/ShipmentGeek_Screen2.png?psid=1" width="400">
 
 ## Requirements
 * Windows 7
