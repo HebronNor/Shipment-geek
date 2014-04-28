@@ -36,6 +36,9 @@
   <PropertyGroup>
     <ApplicationIcon>Resources\shipment.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ExceptionReporter.WinForms">
       <HintPath>..\packages\ExceptionReporter.2.1.2\lib\ExceptionReporter.WinForms.dll</HintPath>
@@ -117,7 +120,12 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>copy "$(ProjectDir)README.md" $(SolutionDir)
-copy "$(ProjectDir)CHANGES.md" $(SolutionDir)</PostBuildEvent>
+copy "$(ProjectDir)CHANGES.md" $(SolutionDir)
+
+mkdir $(TargetDir)Release
+copy $(TargetDir)ExceptionReporter.WinForms.dll $(TargetDir)Release
+copy $(TargetPath) $(TargetDir)Release
+copy $(ProjectDir)README.md $(TargetDir)Release</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

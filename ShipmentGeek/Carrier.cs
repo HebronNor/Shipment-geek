@@ -37,6 +37,11 @@ namespace ShipmentGeek
             {
                 Name = "DHL", 
                 TrackURL = @"http://www.dhl.com/content/g0/en/express/tracking.shtml?brand=DHL&AWB={0}%0D%0A"
+            },
+            new Carrier
+            {
+                Name = "Canada Post", 
+                TrackURL = @"http://www.canadapost.ca/cpotools/apps/track/personal/findByTrackNumber?trackingNumber={0}&amp;LOCALE=en&amp;LOCALE2=en"
             }
         };
 
