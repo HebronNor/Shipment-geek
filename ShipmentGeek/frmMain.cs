@@ -50,7 +50,7 @@ namespace ShipmentGeek
                 shipmentInfo.Incomming = radIncoming.Checked;
                 shipmentInfo.Outgoing = radOutgoing.Checked;
                 shipmentInfo.Name = txtName.Text;
-                shipmentInfo.Date = dateTimePicker.Value;
+                shipmentInfo.Date = dateSent.Value;
                 shipmentInfo.Value = txtValue.Text;
                 shipmentInfo.URL = txtURL.Text;
                 shipmentInfo.Carrier = (cmbCarrier.SelectedItem != null ? cmbCarrier.SelectedItem.ToString() : string.Empty);
@@ -72,24 +72,31 @@ namespace ShipmentGeek
                 }
 
                 Save();
+                SelectShipment(shipmentInfo);
+            }
+        }
 
-                if (shipmentInfo.Incomming)
+        private void SelectShipment(ShipmentInfo si)
+        {
+            if (si != null)
+            {
+                if (si.Incomming)
                 {
-                    if (lstIncoming.FindItemWithText(shipmentInfo.ID.ToString()) != null)
+                    if (lstIncoming.FindItemWithText(si.ID.ToString()) != null)
                     {
-                        lstIncoming.FindItemWithText(shipmentInfo.ID.ToString()).Selected = true;
-                        lstIncoming.FindItemWithText(shipmentInfo.ID.ToString()).EnsureVisible();
+                        lstIncoming.FindItemWithText(si.ID.ToString()).Selected = true;
+                        lstIncoming.FindItemWithText(si.ID.ToString()).EnsureVisible();
                     }
                     else
                         ClearListFocus();
                 }
 
-                if (shipmentInfo.Outgoing)
+                if (si.Outgoing)
                 {
-                    if (lstOutgoing.FindItemWithText(shipmentInfo.ID.ToString()) != null)
+                    if (lstOutgoing.FindItemWithText(si.ID.ToString()) != null)
                     {
-                        lstOutgoing.FindItemWithText(shipmentInfo.ID.ToString()).Selected = true;
-                        lstOutgoing.FindItemWithText(shipmentInfo.ID.ToString()).EnsureVisible();
+                        lstOutgoing.FindItemWithText(si.ID.ToString()).Selected = true;
+                        lstOutgoing.FindItemWithText(si.ID.ToString()).EnsureVisible();
                     }
                     else
                         ClearListFocus();
@@ -99,6 +106,8 @@ namespace ShipmentGeek
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            this.Text = string.Format("{0} {1}", Var.AssemblyInfo.Name, Var.AssemblyInfo.VersionText);
+
             if (System.IO.File.Exists(Var.FileInfo.ShipmentFile))
             {
                 XML.DeSerializeList<ShipmentInfo>(Var.FileInfo.ShipmentFile, ShipmentInfo.List);
@@ -161,12 +170,12 @@ namespace ShipmentGeek
                 radIncoming.Checked = si.Incomming;
                 radOutgoing.Checked = si.Outgoing;
                 txtName.Text = si.Name;
-                dateTimePicker.Value = si.Date;
+                dateSent.Value = si.Date;
                 txtValue.Text = si.Value;
                 txtURL.Text = si.URL;
                 cmbCarrier.SelectedItem = si.Carrier;
                 txtTracking.Text = si.Tracking;
-                txtComment.Text = si.Comment;
+                txtComment.Text = si.Comment.Replace("\n", Environment.NewLine);
                 chkReceived.Checked = si.Received;
                 chkMissing.Checked = si.Missing;
 
@@ -175,7 +184,7 @@ namespace ShipmentGeek
                 PutShipmentItems(si);
 
                 selectedShipment = si.ID;
-                lblStatStrip.Text = string.Format("Selected: {0} - {1}", (radIncoming.Checked ? "In" : "Out"), si.Name);
+                lblStatStrip.Text = string.Format("Selected: {0} | {1} | {2}", si.ID, (radIncoming.Checked ? "In" : "Out"), si.Name);
 
                 grpItems.Enabled = true;
                 cmdURLopen.Enabled = true;
@@ -233,7 +242,7 @@ namespace ShipmentGeek
             radIncoming.Checked = false;
             radOutgoing.Checked = false;
             txtName.Text = string.Empty;
-            dateTimePicker.Value = DateTime.Today;
+            dateSent.Value = DateTime.Today;
             txtValue.Text = string.Empty;
             txtURL.Text = string.Empty;
             cmbCarrier.SelectedItem = null;
@@ -285,6 +294,7 @@ namespace ShipmentGeek
                     }
 
                     Save();
+                    SelectShipment(siGlobal);
                     PutShipmentItems(siGlobal);
 
                     if (sender == cmdItemSave && lstItems.Items[selectedItem] != null)
@@ -440,6 +450,12 @@ namespace ShipmentGeek
         private void lstOutgoing_Enter(object sender, EventArgs e)
         {
             ClearListFocus();
+        }
+
+        private void chkState_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender == chkReceived && chkReceived.Checked) chkMissing.Checked = false;
+            if (sender == chkMissing && chkMissing.Checked) chkReceived.Checked = false;
         }
 
     }

@@ -21,7 +21,7 @@ namespace ShipmentGeek
 
             reporter.Config.AppAssembly = System.Reflection.Assembly.GetCallingAssembly();
             reporter.Config.AppName = Var.AssemblyInfo.Name;
-            reporter.Config.AppVersion = Var.AssemblyInfo.VersionText;
+            reporter.Config.AppVersion = Var.AssemblyInfo.Version.ToString();
             reporter.Config.TitleText = string.Format("{0} Exception Report", Var.AssemblyInfo.Name);
             reporter.Config.EmailReportAddress = "hebron@tilhol.net";
             //reporter.Config.FilesToAttach = new[] { LogHandler.LogFileName(LogFile.Exception), LogHandler.LogFileName(LogFile.Debug) };

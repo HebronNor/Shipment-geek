@@ -43,7 +43,7 @@
             this.radOutgoing = new System.Windows.Forms.RadioButton();
             this.lblComment = new System.Windows.Forms.Label();
             this.lblReceived = new System.Windows.Forms.Label();
-            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.dateSent = new System.Windows.Forms.DateTimePicker();
             this.lblValue = new System.Windows.Forms.Label();
             this.lblURL = new System.Windows.Forms.Label();
             this.txtValue = new System.Windows.Forms.TextBox();
@@ -155,7 +155,7 @@
             this.tableLayoutPanel1.Controls.Add(this.panType, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblComment, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.lblReceived, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.dateTimePicker, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.dateSent, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblValue, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.lblURL, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.txtValue, 1, 3);
@@ -275,12 +275,12 @@
             this.lblReceived.TabIndex = 9;
             this.lblReceived.Text = "Status";
             // 
-            // dateTimePicker
+            // dateSent
             // 
-            this.dateTimePicker.Location = new System.Drawing.Point(88, 55);
-            this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(138, 20);
-            this.dateTimePicker.TabIndex = 3;
+            this.dateSent.Location = new System.Drawing.Point(88, 55);
+            this.dateSent.Name = "dateSent";
+            this.dateSent.Size = new System.Drawing.Size(138, 20);
+            this.dateSent.TabIndex = 3;
             // 
             // lblValue
             // 
@@ -353,6 +353,7 @@
             this.chkReceived.TabIndex = 0;
             this.chkReceived.Text = "Received";
             this.chkReceived.UseVisualStyleBackColor = true;
+            this.chkReceived.CheckedChanged += new System.EventHandler(this.chkState_CheckedChanged);
             // 
             // chkMissing
             // 
@@ -363,6 +364,7 @@
             this.chkMissing.TabIndex = 1;
             this.chkMissing.Text = "Missing";
             this.chkMissing.UseVisualStyleBackColor = true;
+            this.chkMissing.CheckedChanged += new System.EventHandler(this.chkState_CheckedChanged);
             // 
             // lblCarrier
             // 
@@ -451,7 +453,7 @@
             // 
             this.txtItemText.Location = new System.Drawing.Point(54, 19);
             this.txtItemText.Name = "txtItemText";
-            this.txtItemText.Size = new System.Drawing.Size(223, 20);
+            this.txtItemText.Size = new System.Drawing.Size(208, 20);
             this.txtItemText.TabIndex = 1;
             // 
             // lstItems
@@ -791,7 +793,7 @@
         private System.Windows.Forms.ListView lstItems;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.DateTimePicker dateTimePicker;
+        private System.Windows.Forms.DateTimePicker dateSent;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;

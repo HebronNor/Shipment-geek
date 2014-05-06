@@ -6,6 +6,7 @@
 * Improved shipment selection actions.
 * Added _New_ button for shipment and shipment items.
 * Improved shipment and shipment items save actions.
+* Fixed bug with new line in _comment_ field.
 
 #### v.1.1.0
 * Added days since departure to shipments not received or missing.

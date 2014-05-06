@@ -64,7 +64,6 @@ namespace ShipmentGeek
 
     public class ShipmentItem
     {
-        public int ID { set; get; }
         public string Text { set; get; }
         public int Count { set; get; }
 

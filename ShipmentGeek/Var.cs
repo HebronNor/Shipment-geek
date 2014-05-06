@@ -16,7 +16,7 @@ namespace ShipmentGeek
         {
             public static string Name = Assembly.GetEntryAssembly().GetName().Name;
             public static Version Version = Assembly.GetEntryAssembly().GetName().Version;
-            public static string VersionText = string.Format(@"{0}.{1}.{2} (r{3})", Version.Major, Version.Minor, Version.Build, Version.Revision);
+            public static string VersionText = string.Format(@"{0}.{1}.{2}", Version.Major, Version.Minor, Version.Build);
         }
 
         public class FolderInfo
