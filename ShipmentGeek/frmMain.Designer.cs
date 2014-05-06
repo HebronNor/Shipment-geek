@@ -59,7 +59,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.cmdTrack = new System.Windows.Forms.Button();
             this.txtTracking = new System.Windows.Forms.TextBox();
-            this.cmdItemClear = new System.Windows.Forms.Button();
             this.numItemCount = new System.Windows.Forms.NumericUpDown();
             this.cmdItemSave = new System.Windows.Forms.Button();
             this.txtItemText = new System.Windows.Forms.TextBox();
@@ -68,7 +67,6 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statStrip = new System.Windows.Forms.StatusStrip();
             this.lblStatStrip = new System.Windows.Forms.ToolStripStatusLabel();
-            this.cmdClear = new System.Windows.Forms.Button();
             this.grpIncoming = new System.Windows.Forms.GroupBox();
             this.lstIncoming = new System.Windows.Forms.ListView();
             this.clmInID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -86,8 +84,11 @@
             this.chkShowAll = new System.Windows.Forms.CheckBox();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.grpItems = new System.Windows.Forms.GroupBox();
+            this.cmdItemAdd = new System.Windows.Forms.Button();
             this.splitShipments = new System.Windows.Forms.SplitContainer();
             this.splitDetails = new System.Windows.Forms.SplitContainer();
+            this.cmdNew = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.grpDetails.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panType.SuspendLayout();
@@ -113,13 +114,15 @@
             // cmdSave
             // 
             this.cmdSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmdSave.Enabled = false;
             this.cmdSave.Image = global::ShipmentGeek.Properties.Resources.save;
             this.cmdSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cmdSave.Location = new System.Drawing.Point(12, 502);
+            this.cmdSave.Location = new System.Drawing.Point(93, 502);
             this.cmdSave.Name = "cmdSave";
             this.cmdSave.Size = new System.Drawing.Size(75, 23);
             this.cmdSave.TabIndex = 2;
             this.cmdSave.Text = "Save";
+            this.toolTip.SetToolTip(this.cmdSave, "Save selected shipment");
             this.cmdSave.UseVisualStyleBackColor = true;
             this.cmdSave.Click += new System.EventHandler(this.cmdSave_Click);
             // 
@@ -415,16 +418,6 @@
             this.txtTracking.Size = new System.Drawing.Size(216, 20);
             this.txtTracking.TabIndex = 0;
             // 
-            // cmdItemClear
-            // 
-            this.cmdItemClear.Image = global::ShipmentGeek.Properties.Resources.clean;
-            this.cmdItemClear.Location = new System.Drawing.Point(319, 17);
-            this.cmdItemClear.Name = "cmdItemClear";
-            this.cmdItemClear.Size = new System.Drawing.Size(30, 23);
-            this.cmdItemClear.TabIndex = 2;
-            this.cmdItemClear.UseVisualStyleBackColor = true;
-            this.cmdItemClear.Click += new System.EventHandler(this.cmdItemClear_Click);
-            // 
             // numItemCount
             // 
             this.numItemCount.Location = new System.Drawing.Point(6, 19);
@@ -444,11 +437,13 @@
             // 
             // cmdItemSave
             // 
+            this.cmdItemSave.Enabled = false;
             this.cmdItemSave.Image = global::ShipmentGeek.Properties.Resources.save;
-            this.cmdItemSave.Location = new System.Drawing.Point(283, 17);
+            this.cmdItemSave.Location = new System.Drawing.Point(319, 16);
             this.cmdItemSave.Name = "cmdItemSave";
             this.cmdItemSave.Size = new System.Drawing.Size(30, 23);
             this.cmdItemSave.TabIndex = 2;
+            this.toolTip.SetToolTip(this.cmdItemSave, "Save selected shipment item");
             this.cmdItemSave.UseVisualStyleBackColor = true;
             this.cmdItemSave.Click += new System.EventHandler(this.cmdItemSave_Click);
             // 
@@ -456,7 +451,7 @@
             // 
             this.txtItemText.Location = new System.Drawing.Point(54, 19);
             this.txtItemText.Name = "txtItemText";
-            this.txtItemText.Size = new System.Drawing.Size(208, 20);
+            this.txtItemText.Size = new System.Drawing.Size(223, 20);
             this.txtItemText.TabIndex = 1;
             // 
             // lstItems
@@ -507,19 +502,6 @@
             this.lblStatStrip.Size = new System.Drawing.Size(39, 17);
             this.lblStatStrip.Text = "Status";
             // 
-            // cmdClear
-            // 
-            this.cmdClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cmdClear.Image = global::ShipmentGeek.Properties.Resources.clean;
-            this.cmdClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cmdClear.Location = new System.Drawing.Point(93, 502);
-            this.cmdClear.Name = "cmdClear";
-            this.cmdClear.Size = new System.Drawing.Size(75, 23);
-            this.cmdClear.TabIndex = 3;
-            this.cmdClear.Text = "Clear";
-            this.cmdClear.UseVisualStyleBackColor = true;
-            this.cmdClear.Click += new System.EventHandler(this.cmdClear_Click);
-            // 
             // grpIncoming
             // 
             this.grpIncoming.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -556,6 +538,7 @@
             this.lstIncoming.View = System.Windows.Forms.View.Details;
             this.lstIncoming.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.Shipment_ColumnSort);
             this.lstIncoming.SelectedIndexChanged += new System.EventHandler(this.lstIncoming_SelectedIndexChanged);
+            this.lstIncoming.Enter += new System.EventHandler(this.lstIncoming_Enter);
             this.lstIncoming.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ListView_MouseUp);
             // 
             // clmInID
@@ -619,6 +602,7 @@
             this.lstOutgoing.View = System.Windows.Forms.View.Details;
             this.lstOutgoing.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.Shipment_ColumnSort);
             this.lstOutgoing.SelectedIndexChanged += new System.EventHandler(this.lstOutgoing_SelectedIndexChanged);
+            this.lstOutgoing.Enter += new System.EventHandler(this.lstOutgoing_Enter);
             this.lstOutgoing.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ListView_MouseUp);
             // 
             // clmOutID
@@ -668,9 +652,9 @@
             this.grpItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpItems.Controls.Add(this.cmdItemAdd);
             this.grpItems.Controls.Add(this.lstItems);
             this.grpItems.Controls.Add(this.cmdItemSave);
-            this.grpItems.Controls.Add(this.cmdItemClear);
             this.grpItems.Controls.Add(this.numItemCount);
             this.grpItems.Controls.Add(this.txtItemText);
             this.grpItems.Enabled = false;
@@ -680,6 +664,17 @@
             this.grpItems.TabIndex = 1;
             this.grpItems.TabStop = false;
             this.grpItems.Text = "Shipment Items";
+            // 
+            // cmdItemAdd
+            // 
+            this.cmdItemAdd.Image = global::ShipmentGeek.Properties.Resources.add;
+            this.cmdItemAdd.Location = new System.Drawing.Point(283, 16);
+            this.cmdItemAdd.Name = "cmdItemAdd";
+            this.cmdItemAdd.Size = new System.Drawing.Size(30, 23);
+            this.cmdItemAdd.TabIndex = 6;
+            this.toolTip.SetToolTip(this.cmdItemAdd, "Add new shipment item");
+            this.cmdItemAdd.UseVisualStyleBackColor = true;
+            this.cmdItemAdd.Click += new System.EventHandler(this.cmdItemSave_Click);
             // 
             // splitShipments
             // 
@@ -724,15 +719,29 @@
             this.splitDetails.SplitterDistance = 293;
             this.splitDetails.TabIndex = 1;
             // 
+            // cmdNew
+            // 
+            this.cmdNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmdNew.Image = global::ShipmentGeek.Properties.Resources.add;
+            this.cmdNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cmdNew.Location = new System.Drawing.Point(12, 502);
+            this.cmdNew.Name = "cmdNew";
+            this.cmdNew.Size = new System.Drawing.Size(75, 23);
+            this.cmdNew.TabIndex = 5;
+            this.cmdNew.Text = "New";
+            this.toolTip.SetToolTip(this.cmdNew, "Add new shipment");
+            this.cmdNew.UseVisualStyleBackColor = true;
+            this.cmdNew.Click += new System.EventHandler(this.cmdSave_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(774, 553);
+            this.Controls.Add(this.cmdNew);
             this.Controls.Add(this.splitDetails);
             this.Controls.Add(this.splitShipments);
             this.Controls.Add(this.chkShowAll);
-            this.Controls.Add(this.cmdClear);
             this.Controls.Add(this.statStrip);
             this.Controls.Add(this.cmdSave);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -792,7 +801,6 @@
         private System.Windows.Forms.CheckBox chkReceived;
         private System.Windows.Forms.StatusStrip statStrip;
         private System.Windows.Forms.ToolStripStatusLabel lblStatStrip;
-        private System.Windows.Forms.Button cmdClear;
         private System.Windows.Forms.Button cmdItemSave;
         private System.Windows.Forms.TextBox txtItemText;
         private System.Windows.Forms.NumericUpDown numItemCount;
@@ -809,7 +817,6 @@
         private System.Windows.Forms.ColumnHeader clmOutDate;
         private System.Windows.Forms.ColumnHeader clmOutItems;
         private System.Windows.Forms.CheckBox chkShowAll;
-        private System.Windows.Forms.Button cmdItemClear;
         private System.Windows.Forms.ErrorProvider errProvider;
         private System.Windows.Forms.CheckBox chkMissing;
         private System.Windows.Forms.ColumnHeader clmInDays;
@@ -831,6 +838,9 @@
         private System.Windows.Forms.TextBox txtTracking;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button cmdTrack;
+        private System.Windows.Forms.Button cmdNew;
+        private System.Windows.Forms.Button cmdItemAdd;
+        private System.Windows.Forms.ToolTip toolTip;
 
     }
 }

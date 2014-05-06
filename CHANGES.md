@@ -2,6 +2,11 @@
 
 ### Change log
 
+#### v.1.2.0
+* Improved shipment selection actions.
+* Added _New_ button for shipment and shipment items.
+* Improved shipment and shipment items save actions.
+
 #### v.1.1.0
 * Added days since departure to shipments not received or missing.
 * Improved user input validation.

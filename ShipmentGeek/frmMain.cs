@@ -59,12 +59,12 @@ namespace ShipmentGeek
                 shipmentInfo.Received = chkReceived.Checked;
                 shipmentInfo.Missing = chkMissing.Checked;
 
-                if (selectedShipment == 0)
+                if (sender == cmdNew)
                 {
                     shipmentInfo.ID = ShipmentInfo.GetID;
                     ShipmentInfo.List.Add(shipmentInfo);
                 }
-                else
+                else if (sender == cmdSave)
                 {
                     shipmentInfo.ID = siGlobal.ID;
                     shipmentInfo.Items = siGlobal.Items;
@@ -72,7 +72,28 @@ namespace ShipmentGeek
                 }
 
                 Save();
-                ClearListFocus();
+
+                if (shipmentInfo.Incomming)
+                {
+                    if (lstIncoming.FindItemWithText(shipmentInfo.ID.ToString()) != null)
+                    {
+                        lstIncoming.FindItemWithText(shipmentInfo.ID.ToString()).Selected = true;
+                        lstIncoming.FindItemWithText(shipmentInfo.ID.ToString()).EnsureVisible();
+                    }
+                    else
+                        ClearListFocus();
+                }
+
+                if (shipmentInfo.Outgoing)
+                {
+                    if (lstOutgoing.FindItemWithText(shipmentInfo.ID.ToString()) != null)
+                    {
+                        lstOutgoing.FindItemWithText(shipmentInfo.ID.ToString()).Selected = true;
+                        lstOutgoing.FindItemWithText(shipmentInfo.ID.ToString()).EnsureVisible();
+                    }
+                    else
+                        ClearListFocus();
+                }
             }
         }
 
@@ -131,6 +152,7 @@ namespace ShipmentGeek
         private void PutShipmentDetails(ListView listView)
         {
             errProvider.Clear();
+            cmdSave.Enabled = true;
 
             if (listView.SelectedItems.Count > 0)
             {
@@ -182,23 +204,29 @@ namespace ShipmentGeek
 
         private void lstIncoming_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lstIncoming.SelectedItems.Count > 0) lstOutgoing.SelectedIndices.Clear();
             PutShipmentDetails(lstIncoming);
         }
 
         private void lstOutgoing_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lstOutgoing.SelectedItems.Count > 0) lstIncoming.SelectedIndices.Clear();
             PutShipmentDetails(lstOutgoing);
         }
 
         private void chkShowReceived_CheckedChanged(object sender, EventArgs e)
         {
             PopulateLists();
+
+            if (selectedShipment > 0)
+            {
+                if ((siGlobal.Incomming && lstIncoming.FindItemWithText(siGlobal.ID.ToString()) == null) || (siGlobal.Outgoing && lstOutgoing.FindItemWithText(siGlobal.ID.ToString()) == null))
+                    ClearListFocus();
+            }
         }
 
         private void ClearListFocus()
         {
+            cmdSave.Enabled = false;
+
             lstIncoming.SelectedItems.Clear();
             lstOutgoing.SelectedItems.Clear();
 
@@ -227,11 +255,6 @@ namespace ShipmentGeek
             cmdTrack.Enabled = false;
         }
 
-        private void cmdClear_Click(object sender, EventArgs e)
-        {
-            ClearListFocus();
-        }
-
         private void cmdItemSave_Click(object sender, EventArgs e)
         {
             errProvider.Clear();
@@ -244,21 +267,31 @@ namespace ShipmentGeek
                 }
                 else
                 {
+                    int selectedItem = -1;
+
                     ShipmentItem item = new ShipmentItem();
                     item.Text = txtItemText.Text;
                     item.Count = Convert.ToInt32(numItemCount.Value);
 
-                    if (lstItems.SelectedIndices.Count == 0)
+                    if (sender == cmdItemAdd)
                     {
                         siGlobal.Items.Add(item);
+                        selectedItem = lstItems.Items.Count;
                     }
-                    else
+                    else if (sender == cmdItemSave)
                     {
-                        siGlobal.Items[lstItems.SelectedIndices[0]] = item;
+                        selectedItem = lstItems.SelectedIndices[0];
+                        siGlobal.Items[selectedItem] = item;
                     }
 
                     Save();
                     PutShipmentItems(siGlobal);
+
+                    if (sender == cmdItemSave && lstItems.Items[selectedItem] != null)
+                    {
+                        lstItems.Items[selectedItem].Selected = true;
+                        lstItems.Items[selectedItem].EnsureVisible();
+                    }
                 }
             }
         }
@@ -297,19 +330,14 @@ namespace ShipmentGeek
 
                 txtItemText.Text = si.Text;
                 numItemCount.Value = si.Count;
+                cmdItemSave.Enabled = true;
             }
             else
             {
                 txtItemText.Text = string.Empty;
                 numItemCount.Value = 1;
+                cmdItemSave.Enabled = false;
             }
-        }
-
-        private void cmdItemClear_Click(object sender, EventArgs e)
-        {
-            txtItemText.Text = string.Empty;
-            numItemCount.Value = 1;
-            lstItems.SelectedIndices.Clear();
         }
 
         private void lstItems_MouseUp(object sender, MouseEventArgs e)
@@ -402,6 +430,16 @@ namespace ShipmentGeek
                     }
                 }
             }
+        }
+
+        private void lstIncoming_Enter(object sender, EventArgs e)
+        {
+            ClearListFocus();
+        }
+
+        private void lstOutgoing_Enter(object sender, EventArgs e)
+        {
+            ClearListFocus();
         }
 
     }

@@ -102,13 +102,11 @@
     <None Include="Resources\shipment.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\clean.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\save.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ExceptionReporter.WinForms.xml" />
+    <None Include="Resources\add.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
