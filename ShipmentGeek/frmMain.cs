@@ -111,7 +111,7 @@ namespace ShipmentGeek
             if (System.IO.File.Exists(Var.FileInfo.ShipmentFile))
             {
                 XML.DeSerializeList<ShipmentInfo>(Var.FileInfo.ShipmentFile, ShipmentInfo.List);
-                lblStatStrip.Text = string.Format("Loaded {0} shipment{1}", ShipmentInfo.List.Count, (ShipmentInfo.List.Count == 1 ? "" : "s"));
+                LoadSaveText(string.Format("Loaded {0} shipment{1}", ShipmentInfo.List.Count, (ShipmentInfo.List.Count == 1 ? "" : "s")));
             }
 
             ShipmentInfo.List.Sort(ShipmentInfo.DateComparison);
@@ -127,7 +127,7 @@ namespace ShipmentGeek
         private void Save()
         {
             XML.SerializeList<ShipmentInfo>(Var.FileInfo.ShipmentFile, ShipmentInfo.List);
-            lblStatStrip.Text = string.Format("Saved {0} shipment{1}", ShipmentInfo.List.Count, (ShipmentInfo.List.Count == 1 ? "" : "s"));
+            LoadSaveText(string.Format("Saved {0} shipment{1}", ShipmentInfo.List.Count, (ShipmentInfo.List.Count == 1 ? "" : "s")));
 
             PopulateLists();
         }
@@ -184,7 +184,8 @@ namespace ShipmentGeek
                 PutShipmentItems(si);
 
                 selectedShipment = si.ID;
-                lblStatStrip.Text = string.Format("Selected: {0} | {1} | {2}", si.ID, (radIncoming.Checked ? "In" : "Out"), si.Name);
+                srpSelected.Visible = true;
+                srpSelected.Text = string.Format("Selected: {0} | {1} | {2}", si.ID, (radIncoming.Checked ? "In" : "Out"), si.Name);
 
                 grpItems.Enabled = true;
                 cmdURLopen.Enabled = true;
@@ -192,7 +193,7 @@ namespace ShipmentGeek
             }
             else
             {
-                lblStatStrip.Text = string.Empty;
+                srpSelected.Visible = false;
                 ClearListFocus();
             }
         }
@@ -456,6 +457,17 @@ namespace ShipmentGeek
         {
             if (sender == chkReceived && chkReceived.Checked) chkMissing.Checked = false;
             if (sender == chkMissing && chkMissing.Checked) chkReceived.Checked = false;
+        }
+
+        private void LoadSaveText(string text)
+        {
+            srpLoadSave.Visible = true;
+            srpLoadSave.Text = text;
+
+            Timer aTimer = new Timer();
+            aTimer.Tick += (Sender, Args) => { srpLoadSave.Visible = false; aTimer.Stop(); aTimer.Dispose(); };
+            aTimer.Interval = 5000;
+            aTimer.Start();
         }
 
     }

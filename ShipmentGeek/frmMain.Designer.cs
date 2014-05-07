@@ -66,7 +66,8 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statStrip = new System.Windows.Forms.StatusStrip();
-            this.lblStatStrip = new System.Windows.Forms.ToolStripStatusLabel();
+            this.srpSelected = new System.Windows.Forms.ToolStripStatusLabel();
+            this.srpLoadSave = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpIncoming = new System.Windows.Forms.GroupBox();
             this.lstIncoming = new System.Windows.Forms.ListView();
             this.clmInID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -491,18 +492,29 @@
             // statStrip
             // 
             this.statStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblStatStrip});
+            this.srpSelected,
+            this.srpLoadSave});
             this.statStrip.Location = new System.Drawing.Point(0, 531);
             this.statStrip.Name = "statStrip";
             this.statStrip.Size = new System.Drawing.Size(774, 22);
             this.statStrip.TabIndex = 4;
             this.statStrip.Text = "statusStrip1";
             // 
-            // lblStatStrip
+            // srpSelected
             // 
-            this.lblStatStrip.Name = "lblStatStrip";
-            this.lblStatStrip.Size = new System.Drawing.Size(39, 17);
-            this.lblStatStrip.Text = "Status";
+            this.srpSelected.Image = global::ShipmentGeek.Properties.Resources.selected;
+            this.srpSelected.Name = "srpSelected";
+            this.srpSelected.Size = new System.Drawing.Size(67, 17);
+            this.srpSelected.Text = "Selected";
+            this.srpSelected.Visible = false;
+            // 
+            // srpLoadSave
+            // 
+            this.srpLoadSave.Image = global::ShipmentGeek.Properties.Resources.save;
+            this.srpLoadSave.Name = "srpLoadSave";
+            this.srpLoadSave.Size = new System.Drawing.Size(73, 17);
+            this.srpLoadSave.Text = "LoadSave";
+            this.srpLoadSave.Visible = false;
             // 
             // grpIncoming
             // 
@@ -802,7 +814,7 @@
         private System.Windows.Forms.Label lblReceived;
         private System.Windows.Forms.CheckBox chkReceived;
         private System.Windows.Forms.StatusStrip statStrip;
-        private System.Windows.Forms.ToolStripStatusLabel lblStatStrip;
+        private System.Windows.Forms.ToolStripStatusLabel srpSelected;
         private System.Windows.Forms.Button cmdItemSave;
         private System.Windows.Forms.TextBox txtItemText;
         private System.Windows.Forms.NumericUpDown numItemCount;
@@ -843,6 +855,7 @@
         private System.Windows.Forms.Button cmdNew;
         private System.Windows.Forms.Button cmdItemAdd;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.ToolStripStatusLabel srpLoadSave;
 
     }
 }

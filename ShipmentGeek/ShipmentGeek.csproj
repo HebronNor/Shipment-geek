@@ -106,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ExceptionReporter.WinForms.xml" />
+    <None Include="Resources\selected.png" />
     <None Include="Resources\add.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
