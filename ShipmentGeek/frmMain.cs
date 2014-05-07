@@ -185,7 +185,7 @@ namespace ShipmentGeek
 
                 selectedShipment = si.ID;
                 srpSelected.Visible = true;
-                srpSelected.Text = string.Format("Selected: {0} | {1} | {2}", si.ID, (radIncoming.Checked ? "In" : "Out"), si.Name);
+                srpSelected.Text = string.Format("{0} : {1} : {2}", si.ID, (radIncoming.Checked ? "In" : "Out"), si.Name);
 
                 grpItems.Enabled = true;
                 cmdURLopen.Enabled = true;

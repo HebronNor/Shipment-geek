@@ -503,6 +503,7 @@
             // srpSelected
             // 
             this.srpSelected.Image = global::ShipmentGeek.Properties.Resources.selected;
+            this.srpSelected.Margin = new System.Windows.Forms.Padding(0, 3, 5, 2);
             this.srpSelected.Name = "srpSelected";
             this.srpSelected.Size = new System.Drawing.Size(67, 17);
             this.srpSelected.Text = "Selected";
@@ -511,6 +512,7 @@
             // srpLoadSave
             // 
             this.srpLoadSave.Image = global::ShipmentGeek.Properties.Resources.save;
+            this.srpLoadSave.Margin = new System.Windows.Forms.Padding(0, 3, 5, 2);
             this.srpLoadSave.Name = "srpLoadSave";
             this.srpLoadSave.Size = new System.Drawing.Size(73, 17);
             this.srpLoadSave.Text = "LoadSave";
