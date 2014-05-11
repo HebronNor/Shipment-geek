@@ -124,7 +124,8 @@ copy "$(ProjectDir)CHANGES.md" $(SolutionDir)
 mkdir $(TargetDir)Release
 copy $(TargetDir)ExceptionReporter.WinForms.dll $(TargetDir)Release
 copy $(TargetPath) $(TargetDir)Release
-copy $(ProjectDir)README.md $(TargetDir)Release</PostBuildEvent>
+copy $(ProjectDir)README.md $(TargetDir)Release
+copy $(ProjectDir)CHANGES.md $(TargetDir)Release</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
