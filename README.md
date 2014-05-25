@@ -26,7 +26,7 @@ Every time you start ShipmentGeek a backup of your library is stored in the sub-
 
 #### Restore backup
 First make sure ShipmentGeek is not running, delete your current `ShipmentGeek.xml` file. Then copy the file you want to restore from the `Backup/` sub-folder into the main folder,
-rename it `ShipmentGeek.xml`. When starting ShipmentGeek your library will now have been restored to backup file you copied.
+rename it `ShipmentGeek.xml`. When starting ShipmentGeek your library will now have been restored to the backup file you copied.
 
 ## Issues
 The application is still work in progress so there may be bugs. Please report all bugs to the issue tracker on this repository ([here](https://github.com/HebronNor/ShipmentGeek/issues)).
