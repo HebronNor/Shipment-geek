@@ -111,7 +111,7 @@ namespace ShipmentGeek
             if (System.IO.File.Exists(Var.FileInfo.ShipmentFile))
             {
                 XML.DeSerializeList<ShipmentInfo>(Var.FileInfo.ShipmentFile, ShipmentInfo.List);
-                LoadSaveText(string.Format("Loaded {0} shipment{1}", ShipmentInfo.List.Count, (ShipmentInfo.List.Count == 1 ? "" : "s")));
+                StatusText(srpLoadSave, string.Format("Loaded {0} shipment{1}", ShipmentInfo.List.Count, (ShipmentInfo.List.Count == 1 ? "" : "s")));
             }
 
             ShipmentInfo.List.Sort(ShipmentInfo.DateComparison);
@@ -127,17 +127,27 @@ namespace ShipmentGeek
         private void Save()
         {
             XML.SerializeList<ShipmentInfo>(Var.FileInfo.ShipmentFile, ShipmentInfo.List);
-            LoadSaveText(string.Format("Saved {0} shipment{1}", ShipmentInfo.List.Count, (ShipmentInfo.List.Count == 1 ? "" : "s")));
+            StatusText(srpLoadSave, string.Format("Saved {0} shipment{1}", ShipmentInfo.List.Count, (ShipmentInfo.List.Count == 1 ? "" : "s")));
 
             PopulateLists();
         }
 
-        private void PopulateLists()
+        private void PopulateLists(string search = null)
         {
             lstIncoming.Items.Clear();
             lstOutgoing.Items.Clear();
 
-            foreach (ShipmentInfo shipment in ShipmentInfo.List)
+            List<ShipmentInfo> list = new List<ShipmentInfo>();
+
+            if (search == null)
+                list = ShipmentInfo.List;
+            else
+                list = ShipmentInfo.List.Where(s => 
+                    s.Name.ToLower().Contains(search.ToLower()) || 
+                    s.Comment.ToLower().Contains(search.ToLower())
+                    ).ToList();
+
+            foreach (ShipmentInfo shipment in list)
             {
                 ListViewItem item = new ListViewItem(new[] { 
                     shipment.ID.ToString(),
@@ -147,7 +157,7 @@ namespace ShipmentGeek
                     shipment.Items.Sum(f => f.Count).ToString()
                 });
 
-                if (chkShowAll.Checked || (!chkShowAll.Checked && !shipment.Received && !shipment.Missing))
+                if (chkShowAll.Checked || (!chkShowAll.Checked && !shipment.Received && !shipment.Missing) || search != null)
                 {
                     if (shipment.Missing) item.ForeColor = Color.Red;
                     else if (shipment.Received) item.ForeColor = Color.Green;
@@ -156,6 +166,9 @@ namespace ShipmentGeek
                     else if (shipment.Outgoing) lstOutgoing.Items.Add(item);
                 }
             }
+
+            if (search != null)
+                StatusText(srpSearch, string.Format("Found {0} shipment{1}", list.Count, (list.Count == 1 ? "" : "s")));
         }
 
         private void PutShipmentDetails(ListView listView)
@@ -467,15 +480,37 @@ namespace ShipmentGeek
             if (sender == chkMissing && chkMissing.Checked) chkReceived.Checked = false;
         }
 
-        private void LoadSaveText(string text)
+        private void StatusText(ToolStripLabel label, string text)
         {
-            srpLoadSave.Visible = true;
-            srpLoadSave.Text = text;
+            label.Visible = true;
+            label.Text = text;
 
             Timer aTimer = new Timer();
-            aTimer.Tick += (Sender, Args) => { srpLoadSave.Visible = false; aTimer.Stop(); aTimer.Dispose(); };
+            aTimer.Tick += (Sender, Args) => { label.Visible = false; aTimer.Stop(); aTimer.Dispose(); };
             aTimer.Interval = 5000;
             aTimer.Start();
+        }
+
+        private void mnuExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void mnuAbout_Click(object sender, EventArgs e)
+        {
+            frmAbout formAbout = new frmAbout(Var.AssemblyInfo.VersionText, "", Var.AssemblyInfo.DEVELOPED_BY);
+            formAbout.ShowDialog();
+        }
+
+        private void mnuShipmentSearch_Click(object sender, EventArgs e)
+        {
+            string searchText = FormOperation.ShowDialog("Words to search for", "Find shipment");
+
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                ClearListFocus();
+                PopulateLists(searchText);
+            }
         }
 
     }

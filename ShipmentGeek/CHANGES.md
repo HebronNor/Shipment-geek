@@ -4,6 +4,8 @@
 
 #### v.1.3.0
 * Show dialog box when removing shipment and shipment item.
+* Added search for shipments.
+* Added menu strip and about form.
 
 #### v.1.2.0
 * Improved shipment selection actions.

@@ -14,6 +14,7 @@ namespace ShipmentGeek
 
         public class AssemblyInfo
         {
+            public const string DEVELOPED_BY = "Developed by Thomas Jensen";
             public static string Name = Assembly.GetEntryAssembly().GetName().Name;
             public static Version Version = Assembly.GetEntryAssembly().GetName().Version;
             public static string VersionText = string.Format(@"{0}.{1}.{2}", Version.Major, Version.Minor, Version.Build);
