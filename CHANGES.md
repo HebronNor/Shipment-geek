@@ -2,6 +2,9 @@
 
 ### Change log
 
+#### v.1.3.0
+* Show dialog box when removing shipment and shipment item.
+
 #### v.1.2.0
 * Improved shipment selection actions.
 * Added _New_ button for shipment and shipment items.

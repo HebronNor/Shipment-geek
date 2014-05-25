@@ -318,14 +318,18 @@ namespace ShipmentGeek
 
                 if (item != null)
                 {
-                    MenuItem removeItem = cm.MenuItems.Add("Remove item");
+                    MenuItem removeItem = cm.MenuItems.Add("Remove shipment");
                     removeItem.Click += (Sender, eventArgs) => 
                     {
                         ShipmentInfo si = ShipmentInfo.List.First(f => f.ID == Convert.ToInt32(item.Text));
-                        ShipmentInfo.List.Remove(si);
 
-                        Save();
-                        ClearListFocus();
+                        if (MsgManager.ShowDialog(string.Format("Really delete shipment '{0}' ?", si.Name), "Remove shipment"))
+                        {
+                            ShipmentInfo.List.Remove(si);
+
+                            Save();
+                            ClearListFocus();
+                        }
                     };
 
                     cm.Show(sourceList, e.Location);
@@ -362,14 +366,18 @@ namespace ShipmentGeek
 
                 if (item != null)
                 {
-                    MenuItem removeItem = cm.MenuItems.Add("Remove item");
+                    MenuItem removeItem = cm.MenuItems.Add("Remove shipment item");
                     removeItem.Click += (Sender, eventArgs) =>
                     {
                         ShipmentItem si = siGlobal.Items[lstItems.SelectedIndices[0]];
-                        siGlobal.Items.Remove(si);
 
-                        Save();
-                        PutShipmentItems(siGlobal);
+                        if (MsgManager.ShowDialog(string.Format("Really delete shipment item '{0}' ?", si.Text), "Remove shipment item"))
+                        {
+                            siGlobal.Items.Remove(si);
+
+                            Save();
+                            PutShipmentItems(siGlobal);
+                        }
                     };
 
                     cm.Show(sourceList, e.Location);

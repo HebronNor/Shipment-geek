@@ -15,6 +15,11 @@ namespace ShipmentGeek
             MessageBox.Show(text, title, MessageBoxButtons.OK, icon);
         }
 
+        public static bool ShowDialog(string text, string title, MessageBoxIcon icon = MessageBoxIcon.Question, MessageBoxButtons buttons = MessageBoxButtons.YesNo, DialogResult result = DialogResult.Yes)
+        {
+            return MessageBox.Show(text, title, buttons, icon) == result;
+        }
+
         public static void LaunchExceptionReporter(Exception e)
         {
             ExceptionReporter reporter = new ExceptionReporter();
