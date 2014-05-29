@@ -185,6 +185,7 @@ namespace ShipmentGeek
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.okButton.Image = global::ShipmentGeek.Properties.Resources.yes;
             this.okButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.okButton.Location = new System.Drawing.Point(339, 250);
             this.okButton.Name = "okButton";

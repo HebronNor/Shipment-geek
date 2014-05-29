@@ -144,7 +144,7 @@
             this.cmdSave.Name = "cmdSave";
             this.cmdSave.Size = new System.Drawing.Size(75, 23);
             this.cmdSave.TabIndex = 1;
-            this.cmdSave.Text = "Save";
+            this.cmdSave.Text = "S&ave";
             this.toolTip.SetToolTip(this.cmdSave, "Save selected shipment");
             this.cmdSave.UseVisualStyleBackColor = true;
             this.cmdSave.Click += new System.EventHandler(this.cmdSave_Click);
@@ -463,7 +463,7 @@
             this.cmdNew.Name = "cmdNew";
             this.cmdNew.Size = new System.Drawing.Size(75, 23);
             this.cmdNew.TabIndex = 0;
-            this.cmdNew.Text = "New";
+            this.cmdNew.Text = "&New";
             this.toolTip.SetToolTip(this.cmdNew, "Add new shipment");
             this.cmdNew.UseVisualStyleBackColor = true;
             this.cmdNew.Click += new System.EventHandler(this.cmdSave_Click);
@@ -800,7 +800,7 @@
             this.mnuExit});
             this.mnuFile.Name = "mnuFile";
             this.mnuFile.Size = new System.Drawing.Size(37, 20);
-            this.mnuFile.Text = "File";
+            this.mnuFile.Text = "&File";
             // 
             // mnuNewShipment
             // 
@@ -852,7 +852,7 @@
             this.mnuShowAllShipments});
             this.mnuShipment.Name = "mnuShipment";
             this.mnuShipment.Size = new System.Drawing.Size(70, 20);
-            this.mnuShipment.Text = "Shipment";
+            this.mnuShipment.Text = "&Shipment";
             // 
             // mnuShipmentSearch
             // 
@@ -897,7 +897,7 @@
             this.mnuAbout});
             this.mnuHelp.Name = "mnuHelp";
             this.mnuHelp.Size = new System.Drawing.Size(44, 20);
-            this.mnuHelp.Text = "Help";
+            this.mnuHelp.Text = "&Help";
             // 
             // mnuReadme
             // 
