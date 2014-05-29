@@ -59,6 +59,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.cmdTrack = new System.Windows.Forms.Button();
             this.txtTracking = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.cmdNew = new System.Windows.Forms.Button();
             this.numItemCount = new System.Windows.Forms.NumericUpDown();
             this.cmdItemSave = new System.Windows.Forms.Button();
             this.txtItemText = new System.Windows.Forms.TextBox();
@@ -83,13 +85,11 @@
             this.clmOutDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmOutDays = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmOutItems = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chkShowAll = new System.Windows.Forms.CheckBox();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.grpItems = new System.Windows.Forms.GroupBox();
             this.cmdItemAdd = new System.Windows.Forms.Button();
             this.splitShipments = new System.Windows.Forms.SplitContainer();
             this.splitDetails = new System.Windows.Forms.SplitContainer();
-            this.cmdNew = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.mnuStrip = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,6 +100,9 @@
             this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuShipment = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuShipmentSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuClearFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuShowAllShipments = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuReadme = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuChangeLog = new System.Windows.Forms.ToolStripMenuItem();
@@ -113,6 +116,7 @@
             this.panURL.SuspendLayout();
             this.panStatus.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numItemCount)).BeginInit();
             this.statStrip.SuspendLayout();
             this.grpIncoming.SuspendLayout();
@@ -136,10 +140,10 @@
             this.cmdSave.Enabled = false;
             this.cmdSave.Image = global::ShipmentGeek.Properties.Resources.save;
             this.cmdSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cmdSave.Location = new System.Drawing.Point(93, 529);
+            this.cmdSave.Location = new System.Drawing.Point(100, 1);
             this.cmdSave.Name = "cmdSave";
             this.cmdSave.Size = new System.Drawing.Size(75, 23);
-            this.cmdSave.TabIndex = 3;
+            this.cmdSave.TabIndex = 1;
             this.cmdSave.Text = "Save";
             this.toolTip.SetToolTip(this.cmdSave, "Save selected shipment");
             this.cmdSave.UseVisualStyleBackColor = true;
@@ -153,7 +157,7 @@
             this.grpDetails.Controls.Add(this.tableLayoutPanel1);
             this.grpDetails.Location = new System.Drawing.Point(3, 3);
             this.grpDetails.Name = "grpDetails";
-            this.grpDetails.Size = new System.Drawing.Size(355, 295);
+            this.grpDetails.Size = new System.Drawing.Size(355, 334);
             this.grpDetails.TabIndex = 0;
             this.grpDetails.TabStop = false;
             this.grpDetails.Text = "Shipment Details";
@@ -184,9 +188,10 @@
             this.tableLayoutPanel1.Controls.Add(this.lblTracking, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.cmbCarrier, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 9);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 19);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 9;
+            this.tableLayoutPanel1.RowCount = 10;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
@@ -196,7 +201,8 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(343, 270);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(343, 309);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lblType
@@ -242,7 +248,7 @@
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
             this.txtComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtComment.Size = new System.Drawing.Size(252, 56);
+            this.txtComment.Size = new System.Drawing.Size(252, 65);
             this.txtComment.TabIndex = 8;
             // 
             // panType
@@ -288,7 +294,7 @@
             // lblReceived
             // 
             this.lblReceived.AutoSize = true;
-            this.lblReceived.Location = new System.Drawing.Point(3, 244);
+            this.lblReceived.Location = new System.Drawing.Point(3, 253);
             this.lblReceived.Name = "lblReceived";
             this.lblReceived.Size = new System.Drawing.Size(37, 13);
             this.lblReceived.TabIndex = 9;
@@ -358,7 +364,7 @@
             // 
             this.panStatus.Controls.Add(this.chkReceived);
             this.panStatus.Controls.Add(this.chkMissing);
-            this.panStatus.Location = new System.Drawing.Point(88, 247);
+            this.panStatus.Location = new System.Drawing.Point(88, 256);
             this.panStatus.Name = "panStatus";
             this.panStatus.Size = new System.Drawing.Size(252, 19);
             this.panStatus.TabIndex = 9;
@@ -439,6 +445,29 @@
             this.txtTracking.Size = new System.Drawing.Size(216, 20);
             this.txtTracking.TabIndex = 0;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.cmdNew);
+            this.panel2.Controls.Add(this.cmdSave);
+            this.panel2.Location = new System.Drawing.Point(88, 282);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(252, 24);
+            this.panel2.TabIndex = 10;
+            // 
+            // cmdNew
+            // 
+            this.cmdNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmdNew.Image = global::ShipmentGeek.Properties.Resources.add;
+            this.cmdNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cmdNew.Location = new System.Drawing.Point(0, 1);
+            this.cmdNew.Name = "cmdNew";
+            this.cmdNew.Size = new System.Drawing.Size(75, 23);
+            this.cmdNew.TabIndex = 0;
+            this.cmdNew.Text = "New";
+            this.toolTip.SetToolTip(this.cmdNew, "Add new shipment");
+            this.cmdNew.UseVisualStyleBackColor = true;
+            this.cmdNew.Click += new System.EventHandler(this.cmdSave_Click);
+            // 
             // numItemCount
             // 
             this.numItemCount.Location = new System.Drawing.Point(6, 19);
@@ -489,7 +518,7 @@
             this.lstItems.Location = new System.Drawing.Point(6, 45);
             this.lstItems.MultiSelect = false;
             this.lstItems.Name = "lstItems";
-            this.lstItems.Size = new System.Drawing.Size(343, 168);
+            this.lstItems.Size = new System.Drawing.Size(343, 161);
             this.lstItems.TabIndex = 4;
             this.lstItems.UseCompatibleStateImageBehavior = false;
             this.lstItems.View = System.Windows.Forms.View.Details;
@@ -513,7 +542,7 @@
             this.srpSelected,
             this.srpSearch,
             this.srpLoadSave});
-            this.statStrip.Location = new System.Drawing.Point(0, 558);
+            this.statStrip.Location = new System.Drawing.Point(0, 590);
             this.statStrip.Name = "statStrip";
             this.statStrip.Size = new System.Drawing.Size(774, 22);
             this.statStrip.TabIndex = 4;
@@ -553,7 +582,7 @@
             this.grpIncoming.Controls.Add(this.lstIncoming);
             this.grpIncoming.Location = new System.Drawing.Point(3, 3);
             this.grpIncoming.Name = "grpIncoming";
-            this.grpIncoming.Size = new System.Drawing.Size(377, 241);
+            this.grpIncoming.Size = new System.Drawing.Size(377, 274);
             this.grpIncoming.TabIndex = 0;
             this.grpIncoming.TabStop = false;
             this.grpIncoming.Text = "Incoming Shipments";
@@ -575,7 +604,7 @@
             this.lstIncoming.Location = new System.Drawing.Point(6, 19);
             this.lstIncoming.MultiSelect = false;
             this.lstIncoming.Name = "lstIncoming";
-            this.lstIncoming.Size = new System.Drawing.Size(365, 214);
+            this.lstIncoming.Size = new System.Drawing.Size(365, 247);
             this.lstIncoming.TabIndex = 0;
             this.lstIncoming.UseCompatibleStateImageBehavior = false;
             this.lstIncoming.View = System.Windows.Forms.View.Details;
@@ -617,7 +646,7 @@
             this.grpOutgoing.Controls.Add(this.lstOutgoing);
             this.grpOutgoing.Location = new System.Drawing.Point(3, 3);
             this.grpOutgoing.Name = "grpOutgoing";
-            this.grpOutgoing.Size = new System.Drawing.Size(377, 237);
+            this.grpOutgoing.Size = new System.Drawing.Size(377, 270);
             this.grpOutgoing.TabIndex = 1;
             this.grpOutgoing.TabStop = false;
             this.grpOutgoing.Text = "Outgoing Shipments";
@@ -639,7 +668,7 @@
             this.lstOutgoing.Location = new System.Drawing.Point(6, 19);
             this.lstOutgoing.MultiSelect = false;
             this.lstOutgoing.Name = "lstOutgoing";
-            this.lstOutgoing.Size = new System.Drawing.Size(365, 212);
+            this.lstOutgoing.Size = new System.Drawing.Size(365, 245);
             this.lstOutgoing.TabIndex = 0;
             this.lstOutgoing.UseCompatibleStateImageBehavior = false;
             this.lstOutgoing.View = System.Windows.Forms.View.Details;
@@ -673,19 +702,6 @@
             this.clmOutItems.Text = "Items";
             this.clmOutItems.Width = 40;
             // 
-            // chkShowAll
-            // 
-            this.chkShowAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkShowAll.AutoSize = true;
-            this.chkShowAll.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkShowAll.Location = new System.Drawing.Point(277, 533);
-            this.chkShowAll.Name = "chkShowAll";
-            this.chkShowAll.Size = new System.Drawing.Size(118, 17);
-            this.chkShowAll.TabIndex = 4;
-            this.chkShowAll.Text = "Show all Shipments";
-            this.chkShowAll.UseVisualStyleBackColor = true;
-            this.chkShowAll.CheckedChanged += new System.EventHandler(this.chkShowReceived_CheckedChanged);
-            // 
             // errProvider
             // 
             this.errProvider.ContainerControl = this;
@@ -703,7 +719,7 @@
             this.grpItems.Enabled = false;
             this.grpItems.Location = new System.Drawing.Point(3, 3);
             this.grpItems.Name = "grpItems";
-            this.grpItems.Size = new System.Drawing.Size(355, 219);
+            this.grpItems.Size = new System.Drawing.Size(355, 212);
             this.grpItems.TabIndex = 1;
             this.grpItems.TabStop = false;
             this.grpItems.Text = "Shipment Items";
@@ -737,8 +753,8 @@
             // 
             this.splitShipments.Panel2.Controls.Add(this.grpOutgoing);
             this.splitShipments.Panel2MinSize = 100;
-            this.splitShipments.Size = new System.Drawing.Size(383, 494);
-            this.splitShipments.SplitterDistance = 247;
+            this.splitShipments.Size = new System.Drawing.Size(383, 560);
+            this.splitShipments.SplitterDistance = 280;
             this.splitShipments.TabIndex = 0;
             // 
             // splitDetails
@@ -758,23 +774,9 @@
             // 
             this.splitDetails.Panel2.Controls.Add(this.grpItems);
             this.splitDetails.Panel2MinSize = 125;
-            this.splitDetails.Size = new System.Drawing.Size(361, 528);
-            this.splitDetails.SplitterDistance = 299;
+            this.splitDetails.Size = new System.Drawing.Size(361, 560);
+            this.splitDetails.SplitterDistance = 338;
             this.splitDetails.TabIndex = 1;
-            // 
-            // cmdNew
-            // 
-            this.cmdNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cmdNew.Image = global::ShipmentGeek.Properties.Resources.add;
-            this.cmdNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cmdNew.Location = new System.Drawing.Point(12, 529);
-            this.cmdNew.Name = "cmdNew";
-            this.cmdNew.Size = new System.Drawing.Size(75, 23);
-            this.cmdNew.TabIndex = 2;
-            this.cmdNew.Text = "New";
-            this.toolTip.SetToolTip(this.cmdNew, "Add new shipment");
-            this.cmdNew.UseVisualStyleBackColor = true;
-            this.cmdNew.Click += new System.EventHandler(this.cmdSave_Click);
             // 
             // mnuStrip
             // 
@@ -844,7 +846,10 @@
             // mnuShipment
             // 
             this.mnuShipment.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuShipmentSearch});
+            this.mnuShipmentSearch,
+            this.toolStripSeparator3,
+            this.mnuClearFilter,
+            this.mnuShowAllShipments});
             this.mnuShipment.Name = "mnuShipment";
             this.mnuShipment.Size = new System.Drawing.Size(70, 20);
             this.mnuShipment.Text = "Shipment";
@@ -854,9 +859,34 @@
             this.mnuShipmentSearch.Image = global::ShipmentGeek.Properties.Resources.search;
             this.mnuShipmentSearch.Name = "mnuShipmentSearch";
             this.mnuShipmentSearch.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.mnuShipmentSearch.Size = new System.Drawing.Size(137, 22);
+            this.mnuShipmentSearch.Size = new System.Drawing.Size(218, 22);
             this.mnuShipmentSearch.Text = "Find";
             this.mnuShipmentSearch.Click += new System.EventHandler(this.mnuShipmentSearch_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(215, 6);
+            // 
+            // mnuClearFilter
+            // 
+            this.mnuClearFilter.Image = global::ShipmentGeek.Properties.Resources.clean;
+            this.mnuClearFilter.Name = "mnuClearFilter";
+            this.mnuClearFilter.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.C)));
+            this.mnuClearFilter.Size = new System.Drawing.Size(218, 22);
+            this.mnuClearFilter.Text = "Clear filter";
+            this.mnuClearFilter.Click += new System.EventHandler(this.mnuClearFilter_Click);
+            // 
+            // mnuShowAllShipments
+            // 
+            this.mnuShowAllShipments.CheckOnClick = true;
+            this.mnuShowAllShipments.Image = global::ShipmentGeek.Properties.Resources.shipment_16;
+            this.mnuShowAllShipments.Name = "mnuShowAllShipments";
+            this.mnuShowAllShipments.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.mnuShowAllShipments.Size = new System.Drawing.Size(218, 22);
+            this.mnuShowAllShipments.Text = "Show all shipments";
+            this.mnuShowAllShipments.Click += new System.EventHandler(this.mnuShowAllShipments_Click);
             // 
             // mnuHelp
             // 
@@ -912,14 +942,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 580);
-            this.Controls.Add(this.cmdNew);
+            this.ClientSize = new System.Drawing.Size(774, 612);
             this.Controls.Add(this.splitDetails);
             this.Controls.Add(this.splitShipments);
-            this.Controls.Add(this.chkShowAll);
             this.Controls.Add(this.statStrip);
             this.Controls.Add(this.mnuStrip);
-            this.Controls.Add(this.cmdSave);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mnuStrip;
             this.Name = "frmMain";
@@ -936,6 +963,7 @@
             this.panStatus.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numItemCount)).EndInit();
             this.statStrip.ResumeLayout(false);
             this.statStrip.PerformLayout();
@@ -995,7 +1023,6 @@
         private System.Windows.Forms.ColumnHeader clmOutName;
         private System.Windows.Forms.ColumnHeader clmOutDate;
         private System.Windows.Forms.ColumnHeader clmOutItems;
-        private System.Windows.Forms.CheckBox chkShowAll;
         private System.Windows.Forms.ErrorProvider errProvider;
         private System.Windows.Forms.CheckBox chkMissing;
         private System.Windows.Forms.ColumnHeader clmInDays;
@@ -1038,6 +1065,10 @@
         private System.Windows.Forms.ToolStripMenuItem mnuReadme;
         private System.Windows.Forms.ToolStripMenuItem mnuChangeLog;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem mnuShowAllShipments;
+        private System.Windows.Forms.ToolStripMenuItem mnuClearFilter;
 
     }
 }

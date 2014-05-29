@@ -73,6 +73,7 @@ namespace ShipmentGeek
 
                 SaveShipment();
                 SelectShipment(shipmentInfo);
+                numItemCount.Focus();
             }
         }
 
@@ -108,6 +109,9 @@ namespace ShipmentGeek
         {
             this.Text = string.Format("{0} {1}", Var.AssemblyInfo.Name, Var.AssemblyInfo.VersionText);
 
+            mnuReadme.Enabled = System.IO.File.Exists(Var.FileInfo.ReadMeFile);
+            mnuChangeLog.Enabled = System.IO.File.Exists(Var.FileInfo.ChangeLogFile);
+
             if (Properties.Settings.Default.SettingsVersion != Var.AssemblyInfo.Version.ToString())
             {
                 Properties.Settings.Default.Upgrade();
@@ -133,8 +137,11 @@ namespace ShipmentGeek
                 StatusText(srpLoadSave, string.Format("Loaded {0}", Var.FileInfo.ShipmentFile));
                 ShipmentInfo.List.Sort(ShipmentInfo.DateComparison);
 
+                mnuShipment.Enabled = true;
                 PopulateLists();
             }
+            else
+                mnuShipment.Enabled = false;
         }
 
         private void SaveShipment()
@@ -153,12 +160,19 @@ namespace ShipmentGeek
             List<ShipmentInfo> list = new List<ShipmentInfo>();
 
             if (search == null)
+            {
                 list = ShipmentInfo.List;
+            }
             else
-                list = ShipmentInfo.List.Where(s => 
-                    s.Name.ToLower().Contains(search.ToLower()) || 
+            {
+                list = ShipmentInfo.List.Where(s =>
+                    s.Name.ToLower().Contains(search.ToLower()) ||
                     s.Comment.ToLower().Contains(search.ToLower())
                     ).ToList();
+            }
+
+            mnuClearFilter.Enabled = (search != null);
+            mnuShowAllShipments.Enabled = (search == null);
 
             foreach (ShipmentInfo shipment in list)
             {
@@ -170,7 +184,7 @@ namespace ShipmentGeek
                     shipment.Items.Sum(f => f.Count).ToString()
                 });
 
-                if (chkShowAll.Checked || (!chkShowAll.Checked && !shipment.Received && !shipment.Missing) || search != null)
+                if (mnuShowAllShipments.Checked || (!mnuShowAllShipments.Checked && !shipment.Received && !shipment.Missing) || search != null)
                 {
                     if (shipment.Missing) item.ForeColor = Color.Red;
                     else if (shipment.Received) item.ForeColor = Color.Green;
@@ -246,17 +260,6 @@ namespace ShipmentGeek
         private void lstOutgoing_SelectedIndexChanged(object sender, EventArgs e)
         {
             PutShipmentDetails(lstOutgoing);
-        }
-
-        private void chkShowReceived_CheckedChanged(object sender, EventArgs e)
-        {
-            PopulateLists();
-
-            if (selectedShipment > 0)
-            {
-                if ((siGlobal.Incomming && lstIncoming.FindItemWithText(siGlobal.ID.ToString()) == null) || (siGlobal.Outgoing && lstOutgoing.FindItemWithText(siGlobal.ID.ToString()) == null))
-                    ClearListFocus();
-            }
         }
 
         private void ClearListFocus()
@@ -582,6 +585,22 @@ namespace ShipmentGeek
             {
                 MsgManager.Show(exp.Message, "Error opening file", MessageBoxIcon.Error);
             }
+        }
+
+        private void mnuShowAllShipments_Click(object sender, EventArgs e)
+        {
+            PopulateLists();
+
+            if (selectedShipment > 0)
+            {
+                if ((siGlobal.Incomming && lstIncoming.FindItemWithText(siGlobal.ID.ToString()) == null) || (siGlobal.Outgoing && lstOutgoing.FindItemWithText(siGlobal.ID.ToString()) == null))
+                    ClearListFocus();
+            }
+        }
+
+        private void mnuClearFilter_Click(object sender, EventArgs e)
+        {
+            PopulateLists();
         }
 
     }

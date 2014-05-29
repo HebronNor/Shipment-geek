@@ -7,6 +7,7 @@
 * Added search for shipments.
 * Added menu strip and about form.
 * Shipment file is selectable.
+* GUI layout changes.
 
 #### v.1.2.0
 * Improved shipment selection actions.
