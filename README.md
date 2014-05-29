@@ -19,14 +19,14 @@ To upgrade your version of ShipmentGeek; unpack the release binary files (`Shipm
 Make sure ShipmentGeek is not running during the upgrade.
 
 ## Shipment library
-Your shipment library is stored in `ShipmentGeek.xml`, this file is not affected when upgrading to a new version.
+Your shipment library is by default stored in `ShipmentGeek.xml`, but you can open and save the shipment file to any location. The shipment file is not affected when upgrading to a new version.
 
 ### Shipment backups
 Every time you start ShipmentGeek a backup of your library is stored in the sub-folder `Backup/`, and named with the current date and time.
 
 #### Restore backup
-First make sure ShipmentGeek is not running, delete your current `ShipmentGeek.xml` file. Then copy the file you want to restore from the `Backup/` sub-folder into the main folder,
-rename it `ShipmentGeek.xml`. When starting ShipmentGeek your library will now have been restored to the backup file you copied.
+To restore a backup simply click the _Open shipment file_ button under the _File_ dropdown menu (or `CTRL+O`) and navigate to the backup file you wish to restore. Select it and press _Open_.
+Then click _Save shipment file as..._ (or `CTRL+S`) and choose a location and name for the restored backup.
 
 ## Issues
 The application is still work in progress so there may be bugs. Please report all bugs to the issue tracker on this repository ([here](https://github.com/HebronNor/ShipmentGeek/issues)).

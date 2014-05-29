@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Shipment Geek")]
 [assembly: AssemblyDescription("Keep track of incoming and outgoing shipments.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("JensenCorp")]
 [assembly: AssemblyProduct("ShipmentGeek")]
 [assembly: AssemblyCopyright("Copyright © Thomas Jensen 2014")]
 [assembly: AssemblyTrademark("")]

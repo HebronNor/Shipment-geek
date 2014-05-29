@@ -71,7 +71,7 @@ namespace ShipmentGeek
                     ShipmentInfo.List[ShipmentInfo.List.IndexOf(siGlobal)] = shipmentInfo;
                 }
 
-                Save();
+                SaveShipment();
                 SelectShipment(shipmentInfo);
             }
         }
@@ -108,15 +108,15 @@ namespace ShipmentGeek
         {
             this.Text = string.Format("{0} {1}", Var.AssemblyInfo.Name, Var.AssemblyInfo.VersionText);
 
-            if (System.IO.File.Exists(Var.FileInfo.ShipmentFile))
+            if (Properties.Settings.Default.SettingsVersion != Var.AssemblyInfo.Version.ToString())
             {
-                XML.DeSerializeList<ShipmentInfo>(Var.FileInfo.ShipmentFile, ShipmentInfo.List);
-                StatusText(srpLoadSave, string.Format("Loaded {0} shipment{1}", ShipmentInfo.List.Count, (ShipmentInfo.List.Count == 1 ? "" : "s")));
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.SettingsVersion = Var.AssemblyInfo.Version.ToString();
+                Properties.Settings.Default.Save();
             }
 
-            ShipmentInfo.List.Sort(ShipmentInfo.DateComparison);
-
-            PopulateLists();
+            if (string.IsNullOrEmpty(Var.FileInfo.ShipmentFile)) Var.FileInfo.ShipmentFile = Var.FileInfo.DefaultShipmentFile;
+            LoadShipment();
 
             Carrier.List.Sort(Carrier.NameComparison);
             foreach (Carrier carrier in Carrier.List)
@@ -124,10 +124,23 @@ namespace ShipmentGeek
             cmbCarrier.Items.Add("Other");
         }
 
-        private void Save()
+        private void LoadShipment()
+        {
+            if (System.IO.File.Exists(Var.FileInfo.ShipmentFile))
+            {
+                ShipmentInfo.List.Clear();
+                XML.DeSerializeList<ShipmentInfo>(Var.FileInfo.ShipmentFile, ShipmentInfo.List);
+                StatusText(srpLoadSave, string.Format("Loaded {0}", Var.FileInfo.ShipmentFile));
+                ShipmentInfo.List.Sort(ShipmentInfo.DateComparison);
+
+                PopulateLists();
+            }
+        }
+
+        private void SaveShipment()
         {
             XML.SerializeList<ShipmentInfo>(Var.FileInfo.ShipmentFile, ShipmentInfo.List);
-            StatusText(srpLoadSave, string.Format("Saved {0} shipment{1}", ShipmentInfo.List.Count, (ShipmentInfo.List.Count == 1 ? "" : "s")));
+            StatusText(srpLoadSave, string.Format("Saved {0}", Var.FileInfo.ShipmentFile));
 
             PopulateLists();
         }
@@ -307,7 +320,7 @@ namespace ShipmentGeek
                         siGlobal.Items[selectedItem] = item;
                     }
 
-                    Save();
+                    SaveShipment();
                     SelectShipment(siGlobal);
                     PutShipmentItems(siGlobal);
 
@@ -340,7 +353,7 @@ namespace ShipmentGeek
                         {
                             ShipmentInfo.List.Remove(si);
 
-                            Save();
+                            SaveShipment();
                             ClearListFocus();
                         }
                     };
@@ -388,7 +401,7 @@ namespace ShipmentGeek
                         {
                             siGlobal.Items.Remove(si);
 
-                            Save();
+                            SaveShipment();
                             PutShipmentItems(siGlobal);
                         }
                     };
@@ -498,7 +511,7 @@ namespace ShipmentGeek
 
         private void mnuAbout_Click(object sender, EventArgs e)
         {
-            frmAbout formAbout = new frmAbout(Var.AssemblyInfo.VersionText, "", Var.AssemblyInfo.DEVELOPED_BY);
+            frmAbout formAbout = new frmAbout(Var.AssemblyInfo.Version.ToString(), Var.AssemblyInfo.DEVELOPED_BY);
             formAbout.ShowDialog();
         }
 
@@ -510,6 +523,64 @@ namespace ShipmentGeek
             {
                 ClearListFocus();
                 PopulateLists(searchText);
+            }
+        }
+
+        private void mnuOpenShipments_Click(object sender, EventArgs e)
+        {
+            openFileDialog.ShowDialog();
+
+            if (!string.IsNullOrEmpty(openFileDialog.FileName))
+            {
+                Var.FileInfo.ShipmentFile = openFileDialog.FileName;
+                LoadShipment();
+            }
+        }
+
+        private void mnuSaveShipments_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.ShowDialog();
+
+            if (!string.IsNullOrEmpty(saveFileDialog.FileName))
+            {
+                Var.FileInfo.ShipmentFile = saveFileDialog.FileName;
+                SaveShipment();
+            }
+        }
+
+        private void mnuNewShipment_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.ShowDialog();
+
+            if (!string.IsNullOrEmpty(saveFileDialog.FileName))
+            {
+                Var.FileInfo.ShipmentFile = saveFileDialog.FileName;
+                ShipmentInfo.List.Clear();
+                SaveShipment();
+            }
+        }
+
+        private void mnuReadme_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("notepad.exe", Var.FileInfo.ReadMeFile);
+            }
+            catch (Exception exp)
+            {
+                MsgManager.Show(exp.Message, "Error opening file", MessageBoxIcon.Error);
+            }
+        }
+
+        private void mnuChangeLog_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("notepad.exe", Var.FileInfo.ChangeLogFile);
+            }
+            catch (Exception exp)
+            {
+                MsgManager.Show(exp.Message, "Error opening file", MessageBoxIcon.Error);
             }
         }
 

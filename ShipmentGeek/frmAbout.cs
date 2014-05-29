@@ -9,7 +9,7 @@ namespace ShipmentGeek
 {
     partial class frmAbout : Form
     {
-        public frmAbout(string version, string library, string developedBy)
+        public frmAbout(string version, string developedBy)
         {
             InitializeComponent();
 
@@ -18,8 +18,8 @@ namespace ShipmentGeek
             //  - Project->Properties->Application->Assembly Information
             //  - AssemblyInfo.cs
             this.Text = String.Format("About {0}", AssemblyTitle);
-            this.labelProductName.Text = String.Format("{0} v.{1}", AssemblyTitle, version);
-            this.labelLibrary.Text = String.Format("Library v.{0}", library);
+            this.labelProductName.Text = AssemblyTitle;
+            this.labelVersion.Text = String.Format("v.{0}", version);
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
             this.labelDevelopedBy.Text = developedBy;
@@ -27,7 +27,7 @@ namespace ShipmentGeek
 
 #if DEBUG
             this.labelConfiguration.Text = "Debug";
-            this.labelConfiguration.Image = Properties.Resources.bug_icon;
+            this.labelConfiguration.Image = Properties.Resources.bug;
 #else
             this.labelConfiguration.Text = "Release";
             this.labelConfiguration.Image = Properties.Resources.shipment_16;
@@ -98,5 +98,17 @@ namespace ShipmentGeek
             }
         }
         #endregion
+
+        private void logoPictureBox_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("http://cigargeeks.com");
+            }
+            catch (Exception exp)
+            {
+                MsgManager.Show(exp.Message, "Error lauching URL", MessageBoxIcon.Error);
+            }
+        }
     }
 }

@@ -29,7 +29,24 @@ namespace ShipmentGeek
 
         public class FileInfo
         {
-            public static string ShipmentFile = FolderInfo.Work + "\\" + AssemblyInfo.Name + ".xml";
+            public static string ShipmentFile
+            {
+                get
+                {
+                    return Properties.Settings.Default.ShipmentFile; 
+                }
+
+                set
+                {
+                    Properties.Settings.Default.ShipmentFile = value;
+                    Properties.Settings.Default.Save();
+                }
+            }
+
+            public static readonly string DefaultShipmentFile = FolderInfo.Work + "\\" + AssemblyInfo.Name + ".xml";
+
+            public static readonly string ReadMeFile = FolderInfo.Work + "\\README.md";
+            public static readonly string ChangeLogFile = FolderInfo.Work + "\\CHANGES.md";
         }
     }
 }

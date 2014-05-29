@@ -67,8 +67,8 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statStrip = new System.Windows.Forms.StatusStrip();
             this.srpSelected = new System.Windows.Forms.ToolStripStatusLabel();
-            this.srpLoadSave = new System.Windows.Forms.ToolStripStatusLabel();
             this.srpSearch = new System.Windows.Forms.ToolStripStatusLabel();
+            this.srpLoadSave = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpIncoming = new System.Windows.Forms.GroupBox();
             this.lstIncoming = new System.Windows.Forms.ListView();
             this.clmInID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -93,11 +93,20 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.mnuStrip = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNewShipment = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOpenShipments = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSaveShipments = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuShipment = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuShipmentSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuReadme = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuChangeLog = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.grpDetails.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panType.SuspendLayout();
@@ -502,8 +511,8 @@
             // 
             this.statStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.srpSelected,
-            this.srpLoadSave,
-            this.srpSearch});
+            this.srpSearch,
+            this.srpLoadSave});
             this.statStrip.Location = new System.Drawing.Point(0, 558);
             this.statStrip.Name = "statStrip";
             this.statStrip.Size = new System.Drawing.Size(774, 22);
@@ -519,6 +528,14 @@
             this.srpSelected.Text = "Selected";
             this.srpSelected.Visible = false;
             // 
+            // srpSearch
+            // 
+            this.srpSearch.Image = global::ShipmentGeek.Properties.Resources.search;
+            this.srpSearch.Name = "srpSearch";
+            this.srpSearch.Size = new System.Drawing.Size(58, 17);
+            this.srpSearch.Text = "Search";
+            this.srpSearch.Visible = false;
+            // 
             // srpLoadSave
             // 
             this.srpLoadSave.Image = global::ShipmentGeek.Properties.Resources.save;
@@ -527,14 +544,6 @@
             this.srpLoadSave.Size = new System.Drawing.Size(73, 17);
             this.srpLoadSave.Text = "LoadSave";
             this.srpLoadSave.Visible = false;
-            // 
-            // srpSearch
-            // 
-            this.srpSearch.Image = global::ShipmentGeek.Properties.Resources.search;
-            this.srpSearch.Name = "srpSearch";
-            this.srpSearch.Size = new System.Drawing.Size(58, 17);
-            this.srpSearch.Text = "Search";
-            this.srpSearch.Visible = false;
             // 
             // grpIncoming
             // 
@@ -782,17 +791,53 @@
             // mnuFile
             // 
             this.mnuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuNewShipment,
+            this.mnuOpenShipments,
+            this.mnuSaveShipments,
+            this.toolStripSeparator1,
             this.mnuExit});
             this.mnuFile.Name = "mnuFile";
             this.mnuFile.Size = new System.Drawing.Size(37, 20);
             this.mnuFile.Text = "File";
+            // 
+            // mnuNewShipment
+            // 
+            this.mnuNewShipment.Image = global::ShipmentGeek.Properties.Resources.document_new;
+            this.mnuNewShipment.Name = "mnuNewShipment";
+            this.mnuNewShipment.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.mnuNewShipment.Size = new System.Drawing.Size(233, 22);
+            this.mnuNewShipment.Text = "New shipment file";
+            this.mnuNewShipment.Click += new System.EventHandler(this.mnuNewShipment_Click);
+            // 
+            // mnuOpenShipments
+            // 
+            this.mnuOpenShipments.Image = global::ShipmentGeek.Properties.Resources.file_load;
+            this.mnuOpenShipments.Name = "mnuOpenShipments";
+            this.mnuOpenShipments.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.mnuOpenShipments.Size = new System.Drawing.Size(233, 22);
+            this.mnuOpenShipments.Text = "Open shipment file";
+            this.mnuOpenShipments.Click += new System.EventHandler(this.mnuOpenShipments_Click);
+            // 
+            // mnuSaveShipments
+            // 
+            this.mnuSaveShipments.Image = global::ShipmentGeek.Properties.Resources.save;
+            this.mnuSaveShipments.Name = "mnuSaveShipments";
+            this.mnuSaveShipments.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.mnuSaveShipments.Size = new System.Drawing.Size(233, 22);
+            this.mnuSaveShipments.Text = "Save shipment file as...";
+            this.mnuSaveShipments.Click += new System.EventHandler(this.mnuSaveShipments_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(230, 6);
             // 
             // mnuExit
             // 
             this.mnuExit.Image = global::ShipmentGeek.Properties.Resources.exit;
             this.mnuExit.Name = "mnuExit";
             this.mnuExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.mnuExit.Size = new System.Drawing.Size(134, 22);
+            this.mnuExit.Size = new System.Drawing.Size(233, 22);
             this.mnuExit.Text = "Exit";
             this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
             // 
@@ -816,19 +861,52 @@
             // mnuHelp
             // 
             this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuReadme,
+            this.mnuChangeLog,
+            this.toolStripSeparator2,
             this.mnuAbout});
             this.mnuHelp.Name = "mnuHelp";
             this.mnuHelp.Size = new System.Drawing.Size(44, 20);
             this.mnuHelp.Text = "Help";
             // 
+            // mnuReadme
+            // 
+            this.mnuReadme.Image = global::ShipmentGeek.Properties.Resources.help;
+            this.mnuReadme.Name = "mnuReadme";
+            this.mnuReadme.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.mnuReadme.Size = new System.Drawing.Size(241, 22);
+            this.mnuReadme.Text = "Readme";
+            this.mnuReadme.Click += new System.EventHandler(this.mnuReadme_Click);
+            // 
+            // mnuChangeLog
+            // 
+            this.mnuChangeLog.Image = global::ShipmentGeek.Properties.Resources.notepad;
+            this.mnuChangeLog.Name = "mnuChangeLog";
+            this.mnuChangeLog.Size = new System.Drawing.Size(241, 22);
+            this.mnuChangeLog.Text = "Change log";
+            this.mnuChangeLog.Click += new System.EventHandler(this.mnuChangeLog_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(238, 6);
+            // 
             // mnuAbout
             // 
-            this.mnuAbout.Image = global::ShipmentGeek.Properties.Resources.about;
+            this.mnuAbout.Image = ((System.Drawing.Image)(resources.GetObject("mnuAbout.Image")));
             this.mnuAbout.Name = "mnuAbout";
             this.mnuAbout.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F1)));
             this.mnuAbout.Size = new System.Drawing.Size(241, 22);
             this.mnuAbout.Text = "About Shipment Geek";
             this.mnuAbout.Click += new System.EventHandler(this.mnuAbout_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.Filter = "Shipment file|*.xml|All files|*.*";
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.Filter = "Shipment file|*.xml|All files|*.*";
             // 
             // frmMain
             // 
@@ -951,6 +1029,15 @@
         private System.Windows.Forms.ToolStripMenuItem mnuAbout;
         private System.Windows.Forms.ToolStripMenuItem mnuShipment;
         private System.Windows.Forms.ToolStripMenuItem mnuShipmentSearch;
+        private System.Windows.Forms.ToolStripMenuItem mnuOpenShipments;
+        private System.Windows.Forms.ToolStripMenuItem mnuSaveShipments;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.ToolStripMenuItem mnuNewShipment;
+        private System.Windows.Forms.ToolStripMenuItem mnuReadme;
+        private System.Windows.Forms.ToolStripMenuItem mnuChangeLog;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 
     }
 }
