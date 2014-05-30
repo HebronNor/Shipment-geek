@@ -265,6 +265,7 @@ namespace ShipmentGeek
         private void ClearListFocus()
         {
             cmdSave.Enabled = false;
+            selectedShipment = 0;
 
             lstIncoming.SelectedItems.Clear();
             lstOutgoing.SelectedItems.Clear();
@@ -285,8 +286,7 @@ namespace ShipmentGeek
             numItemCount.Value = 1;
             txtItemText.Text = string.Empty;
             lstItems.Items.Clear();
-
-            selectedShipment = 0;
+            
             errProvider.Clear();
 
             grpItems.Enabled = false;
@@ -520,7 +520,7 @@ namespace ShipmentGeek
 
         private void mnuShipmentSearch_Click(object sender, EventArgs e)
         {
-            string searchText = FormOperation.ShowDialog("Words to search for", "Find shipment");
+            string searchText = FormOperation.ShowDialog("Search phrase", "Find shipment");
 
             if (!string.IsNullOrEmpty(searchText))
             {

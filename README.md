@@ -5,7 +5,7 @@ Latest **release, with binary files**, can be found [here](https://github.com/He
 Shipment geek is a super light database manager for keeping track of incoming and outgoing shipments. Date, comment, items and whether the shipment has been received or lost can be stored, giving a nice overview of all shipments in transit.
 
 ## Screenshots
-<img src="https://0vpggq.bn1304.livefilestore.com/y2p0DdF_9Mj0-aWPiL6ypMTaXUR9PBH-iebGHy2UjR6Orad3dX_onGCEP9IfkMzL2R2WIFK9A2tj-LaIadMMXOuia_Sj4uj6Y6VFC4LDkKkDdI/ShipmentGeek_Screen3.png?psid=1" width="400">
+<img src="https://0vpggq.bn1.livefilestore.com/y2poeZmyLhkkeKdUvSvl6hxDm1g0tZojsCTulbab9CtlbwuD1tPGOs6m9mzEFidLGqEQ5-CzVhGrsBCDf2tEBuCQagLT2fYXRNp5aVwBdsiCVA/ShipmentGeek_Screen4.png?psid=1" width="450">
 
 ## Installation
 No installation is required; simply unpack the release binary files (`ShipmentGeek_vX.X.X.zip`) to a folder of your choosing.
@@ -27,6 +27,22 @@ Every time you start ShipmentGeek a backup of your library is stored in the sub-
 #### Restore backup
 To restore a backup simply click the _Open shipment file_ button under the _File_ dropdown menu (or `CTRL+O`) and navigate to the backup file you wish to restore. Select it and press _Open_.
 Then click _Save shipment file as..._ (or `CTRL+S`) and choose a location and name for the restored backup.
+
+## Usage
+
+### Shipment list
+Received or missing shipments will be default be hidden from the shipment list, they can be shown by activating the _Show all shipments_ option on the _Shipment_ menu (or `CTRL+A`).
+Received shipments will then be shown in green and missing shipments in red.
+
+### Find shipment
+To search for a shipment click the _Find_ menu option in the _Shipment_ menu (or `CTRL+F`). Enter search phrase and press enter, shipment **name** and **comment** will be searched.
+Click _Clear filter_ in the _Shipment_ menu (or `CTRL+Shift+C`) to clear the search results.
+
+### Updating shipment or item
+Make sure to press _Save_ after you have updated a shipment or an item, otherwise your changes may be lost.
+
+### Removing shipment or item
+Right-click the shipment or item you want to remove to bring up the context menu.
 
 ## Issues
 The application is still work in progress so there may be bugs. Please report all bugs to the issue tracker on this repository ([here](https://github.com/HebronNor/ShipmentGeek/issues)).
