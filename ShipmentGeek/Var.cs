@@ -8,6 +8,13 @@ using System.IO;
 
 namespace ShipmentGeek
 {
+    enum FilterType
+    {
+        None,
+        Find,
+        Category
+    }
+
     class Var
     {
         public static string DateTimeStr = DateTime.Now.ToString("yy-MM-dd_HH-mm-ss");

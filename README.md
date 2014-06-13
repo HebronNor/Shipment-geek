@@ -38,6 +38,11 @@ Received shipments will then be shown in green and missing shipments in red.
 To search for a shipment click the _Find_ menu option in the _Shipment_ menu (or `CTRL+F`). Enter search phrase and press enter, shipment **name** and **comment** will be searched.
 Click _Clear filter_ in the _Shipment_ menu (or `CTRL+Shift+C`) to clear the search results.
 
+### Shipment category
+You may add new categories simply by typing them in the dropdown box, once a shipment has been saved with a new category; that category will be available in the dropdown menu.
+Shipments can be filtered on categories, select a category in the _Shipment_ menu to apply the filter.
+__Note:__ Categories are only removed after the the application is restarted.
+
 ### Updating shipment or item
 Make sure to press _Save_ after you have updated a shipment or an item, otherwise your changes may be lost.
 

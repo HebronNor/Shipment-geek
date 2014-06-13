@@ -16,6 +16,11 @@ namespace ShipmentGeek
         static int selectedShipment;
         ShipmentInfo siGlobal { get { return ShipmentInfo.List.FirstOrDefault(f => f.ID == selectedShipment); } }
 
+        List<string> Categories = new List<string>();
+
+        FilterType Filter = FilterType.None;
+        string FilterSearch = null;
+
         public frmMain()
         {
             InitializeComponent();
@@ -51,6 +56,7 @@ namespace ShipmentGeek
                 shipmentInfo.Outgoing = radOutgoing.Checked;
                 shipmentInfo.Name = txtName.Text;
                 shipmentInfo.Date = dateSent.Value;
+                shipmentInfo.Category = (cmbCategory.SelectedItem != null ? cmbCategory.SelectedItem.ToString() : cmbCategory.Text);
                 shipmentInfo.Value = txtValue.Text;
                 shipmentInfo.URL = txtURL.Text;
                 shipmentInfo.Carrier = (cmbCarrier.SelectedItem != null ? cmbCarrier.SelectedItem.ToString() : string.Empty);
@@ -74,6 +80,7 @@ namespace ShipmentGeek
                 SaveShipment();
                 SelectShipment(shipmentInfo);
                 numItemCount.Focus();
+                AddToCategory(shipmentInfo.Category);
             }
         }
 
@@ -101,6 +108,24 @@ namespace ShipmentGeek
                     }
                     else
                         ClearListFocus();
+                }
+            }
+        }
+
+        private void AddToCategory(string cat)
+        {
+            if (!Categories.Contains(cat) && !string.IsNullOrEmpty(cat))
+            {
+                Categories.Add(cat);
+                Categories.Sort();
+
+                cmbCategory.Items.Clear();
+                mnuCategory.DropDownItems.Clear();
+
+                foreach (string item in Categories)
+                {
+                    cmbCategory.Items.Add(item);
+                    FormOperation.AddScriptMenues(item);
                 }
             }
         }
@@ -139,6 +164,9 @@ namespace ShipmentGeek
 
                 mnuShipment.Enabled = true;
                 PopulateLists();
+
+                foreach (ShipmentInfo cat in ShipmentInfo.List)
+                    if (!string.IsNullOrEmpty(cat.Category)) AddToCategory(cat.Category);
             }
             else
                 mnuShipment.Enabled = false;
@@ -149,30 +177,48 @@ namespace ShipmentGeek
             XML.SerializeList<ShipmentInfo>(Var.FileInfo.ShipmentFile, ShipmentInfo.List);
             StatusText(srpLoadSave, string.Format("Saved {0}", Var.FileInfo.ShipmentFile));
 
-            PopulateLists();
+            PopulateLists(Filter, FilterSearch);
         }
 
-        private void PopulateLists(string search = null)
+        internal void PopulateLists(FilterType filter = FilterType.None, string search = null)
         {
+            Filter = filter;
+            FilterSearch = search;
+
             lstIncoming.Items.Clear();
             lstOutgoing.Items.Clear();
 
             List<ShipmentInfo> list = new List<ShipmentInfo>();
 
-            if (search == null)
+            if (filter == FilterType.None)
             {
                 list = ShipmentInfo.List;
             }
-            else
+            else if (filter == FilterType.Find)
             {
                 list = ShipmentInfo.List.Where(s =>
                     s.Name.ToLower().Contains(search.ToLower()) ||
                     s.Comment.ToLower().Contains(search.ToLower())
                     ).ToList();
             }
+            else if (filter == FilterType.Category)
+            {
+                list = ShipmentInfo.List.Where(s =>
+                    s.Category.Contains(search)
+                    ).ToList();
+            }
 
-            mnuClearFilter.Enabled = (search != null);
-            mnuShowAllShipments.Enabled = (search == null);
+            mnuClearFilter.Enabled = (filter != FilterType.None);
+            mnuShowAllShipments.Enabled = (filter == FilterType.None);
+
+            mnuShipmentSearch.Checked = (filter == FilterType.Find);
+            mnuCategory.Checked = (filter == FilterType.Category);
+
+            if (filter != FilterType.Category)
+            {
+                foreach (ToolStripMenuItem item in Program.MainForm.mnuCategory.DropDownItems)
+                    item.Checked = false;
+            }
 
             foreach (ShipmentInfo shipment in list)
             {
@@ -184,7 +230,7 @@ namespace ShipmentGeek
                     shipment.Items.Sum(f => f.Count).ToString()
                 });
 
-                if (mnuShowAllShipments.Checked || (!mnuShowAllShipments.Checked && !shipment.Received && !shipment.Missing) || search != null)
+                if (mnuShowAllShipments.Checked || (!mnuShowAllShipments.Checked && !shipment.Received && !shipment.Missing) || filter != FilterType.None)
                 {
                     if (shipment.Missing) item.ForeColor = Color.Red;
                     else if (shipment.Received) item.ForeColor = Color.Green;
@@ -194,8 +240,10 @@ namespace ShipmentGeek
                 }
             }
 
-            if (search != null)
-                StatusText(srpSearch, string.Format("Found {0} shipment{1}", list.Count, (list.Count == 1 ? "" : "s")));
+            if (filter != FilterType.None)
+                srpFilterOn.ToolTipText = string.Format("Filter: {0} ({1} shipment{2})", filter.ToString(), list.Count, (list.Count == 1 ? "" : "s"));
+
+            srpFilterOn.Visible = (filter != FilterType.None);
         }
 
         private void PutShipmentDetails(ListView listView)
@@ -211,6 +259,7 @@ namespace ShipmentGeek
                 radOutgoing.Checked = si.Outgoing;
                 txtName.Text = si.Name;
                 dateSent.Value = si.Date;
+                cmbCategory.SelectedItem = si.Category;
                 txtValue.Text = si.Value;
                 txtURL.Text = si.URL;
                 cmbCarrier.SelectedItem = si.Carrier;
@@ -274,6 +323,8 @@ namespace ShipmentGeek
             radOutgoing.Checked = false;
             txtName.Text = string.Empty;
             dateSent.Value = DateTime.Today;
+            cmbCategory.SelectedItem = null;
+            cmbCategory.Text = string.Empty;
             txtValue.Text = string.Empty;
             txtURL.Text = string.Empty;
             cmbCarrier.SelectedItem = null;
@@ -434,7 +485,7 @@ namespace ShipmentGeek
             if (e.Column == 3) ShipmentInfo.List.Sort(ShipmentInfo.DaysComparison);
             if (e.Column == 4) ShipmentInfo.List.Sort(ShipmentInfo.ItemComparison);
 
-            PopulateLists();
+            PopulateLists(Filter, FilterSearch);
         }
 
         private void lstItems_ColumnClick(object sender, ColumnClickEventArgs e)
@@ -525,7 +576,7 @@ namespace ShipmentGeek
             if (!string.IsNullOrEmpty(searchText))
             {
                 ClearListFocus();
-                PopulateLists(searchText);
+                PopulateLists(FilterType.Find, searchText);
             }
         }
 
@@ -601,6 +652,14 @@ namespace ShipmentGeek
         private void mnuClearFilter_Click(object sender, EventArgs e)
         {
             PopulateLists();
+
+            foreach (ToolStripMenuItem item in Program.MainForm.mnuCategory.DropDownItems)
+                item.Checked = false;
+        }
+
+        private void mnuShipment_Click(object sender, EventArgs e)
+        {
+            mnuCategory.Enabled = Categories.Count > 0;
         }
 
     }

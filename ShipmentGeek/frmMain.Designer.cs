@@ -36,14 +36,12 @@
             this.lblType = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
-            this.lblDate = new System.Windows.Forms.Label();
             this.txtComment = new System.Windows.Forms.TextBox();
             this.panType = new System.Windows.Forms.Panel();
             this.radIncoming = new System.Windows.Forms.RadioButton();
             this.radOutgoing = new System.Windows.Forms.RadioButton();
             this.lblComment = new System.Windows.Forms.Label();
             this.lblReceived = new System.Windows.Forms.Label();
-            this.dateSent = new System.Windows.Forms.DateTimePicker();
             this.lblValue = new System.Windows.Forms.Label();
             this.lblURL = new System.Windows.Forms.Label();
             this.txtValue = new System.Windows.Forms.TextBox();
@@ -61,6 +59,10 @@
             this.txtTracking = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cmdNew = new System.Windows.Forms.Button();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.dateSent = new System.Windows.Forms.DateTimePicker();
+            this.lblCategory = new System.Windows.Forms.Label();
+            this.cmbCategory = new System.Windows.Forms.ComboBox();
             this.numItemCount = new System.Windows.Forms.NumericUpDown();
             this.cmdItemSave = new System.Windows.Forms.Button();
             this.txtItemText = new System.Windows.Forms.TextBox();
@@ -69,7 +71,6 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statStrip = new System.Windows.Forms.StatusStrip();
             this.srpSelected = new System.Windows.Forms.ToolStripStatusLabel();
-            this.srpSearch = new System.Windows.Forms.ToolStripStatusLabel();
             this.srpLoadSave = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpIncoming = new System.Windows.Forms.GroupBox();
             this.lstIncoming = new System.Windows.Forms.ListView();
@@ -100,6 +101,8 @@
             this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuShipment = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuShipmentSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuClearFilter = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuShowAllShipments = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,6 +113,7 @@
             this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.srpFilterOn = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpDetails.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panType.SuspendLayout();
@@ -157,7 +161,7 @@
             this.grpDetails.Controls.Add(this.tableLayoutPanel1);
             this.grpDetails.Location = new System.Drawing.Point(3, 3);
             this.grpDetails.Name = "grpDetails";
-            this.grpDetails.Size = new System.Drawing.Size(355, 334);
+            this.grpDetails.Size = new System.Drawing.Size(355, 364);
             this.grpDetails.TabIndex = 0;
             this.grpDetails.TabStop = false;
             this.grpDetails.Text = "Shipment Details";
@@ -173,25 +177,28 @@
             this.tableLayoutPanel1.Controls.Add(this.lblType, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtName, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblName, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblDate, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtComment, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.txtComment, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.panType, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblComment, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.lblReceived, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.lblComment, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.lblReceived, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.lblValue, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblURL, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.txtValue, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.panURL, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.panStatus, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.lblCarrier, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.lblTracking, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.cmbCarrier, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.lblDate, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.dateSent, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblValue, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblURL, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.txtValue, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.panURL, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.panStatus, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.lblCarrier, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.lblTracking, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.cmbCarrier, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.lblCategory, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.cmbCategory, 1, 3);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 19);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 10;
+            this.tableLayoutPanel1.RowCount = 11;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
@@ -202,7 +209,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(343, 309);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(343, 339);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lblType
@@ -230,26 +237,17 @@
             this.lblName.TabIndex = 4;
             this.lblName.Text = "Name";
             // 
-            // lblDate
-            // 
-            this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(3, 52);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(30, 13);
-            this.lblDate.TabIndex = 6;
-            this.lblDate.Text = "Date";
-            // 
             // txtComment
             // 
             this.txtComment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtComment.Location = new System.Drawing.Point(88, 185);
+            this.txtComment.Location = new System.Drawing.Point(88, 211);
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
             this.txtComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtComment.Size = new System.Drawing.Size(252, 65);
-            this.txtComment.TabIndex = 8;
+            this.txtComment.Size = new System.Drawing.Size(252, 69);
+            this.txtComment.TabIndex = 9;
             // 
             // panType
             // 
@@ -285,7 +283,7 @@
             // lblComment
             // 
             this.lblComment.AutoSize = true;
-            this.lblComment.Location = new System.Drawing.Point(3, 182);
+            this.lblComment.Location = new System.Drawing.Point(3, 208);
             this.lblComment.Name = "lblComment";
             this.lblComment.Size = new System.Drawing.Size(51, 13);
             this.lblComment.TabIndex = 8;
@@ -294,23 +292,16 @@
             // lblReceived
             // 
             this.lblReceived.AutoSize = true;
-            this.lblReceived.Location = new System.Drawing.Point(3, 253);
+            this.lblReceived.Location = new System.Drawing.Point(3, 283);
             this.lblReceived.Name = "lblReceived";
             this.lblReceived.Size = new System.Drawing.Size(37, 13);
             this.lblReceived.TabIndex = 9;
             this.lblReceived.Text = "Status";
             // 
-            // dateSent
-            // 
-            this.dateSent.Location = new System.Drawing.Point(88, 55);
-            this.dateSent.Name = "dateSent";
-            this.dateSent.Size = new System.Drawing.Size(138, 20);
-            this.dateSent.TabIndex = 3;
-            // 
             // lblValue
             // 
             this.lblValue.AutoSize = true;
-            this.lblValue.Location = new System.Drawing.Point(3, 78);
+            this.lblValue.Location = new System.Drawing.Point(3, 104);
             this.lblValue.Name = "lblValue";
             this.lblValue.Size = new System.Drawing.Size(34, 13);
             this.lblValue.TabIndex = 13;
@@ -319,7 +310,7 @@
             // lblURL
             // 
             this.lblURL.AutoSize = true;
-            this.lblURL.Location = new System.Drawing.Point(3, 104);
+            this.lblURL.Location = new System.Drawing.Point(3, 130);
             this.lblURL.Name = "lblURL";
             this.lblURL.Size = new System.Drawing.Size(29, 13);
             this.lblURL.TabIndex = 14;
@@ -327,19 +318,19 @@
             // 
             // txtValue
             // 
-            this.txtValue.Location = new System.Drawing.Point(88, 81);
+            this.txtValue.Location = new System.Drawing.Point(88, 107);
             this.txtValue.Name = "txtValue";
             this.txtValue.Size = new System.Drawing.Size(100, 20);
-            this.txtValue.TabIndex = 4;
+            this.txtValue.TabIndex = 5;
             // 
             // panURL
             // 
             this.panURL.Controls.Add(this.cmdURLopen);
             this.panURL.Controls.Add(this.txtURL);
-            this.panURL.Location = new System.Drawing.Point(88, 107);
+            this.panURL.Location = new System.Drawing.Point(88, 133);
             this.panURL.Name = "panURL";
             this.panURL.Size = new System.Drawing.Size(252, 19);
-            this.panURL.TabIndex = 5;
+            this.panURL.TabIndex = 6;
             // 
             // cmdURLopen
             // 
@@ -350,6 +341,7 @@
             this.cmdURLopen.Size = new System.Drawing.Size(30, 20);
             this.cmdURLopen.TabIndex = 1;
             this.cmdURLopen.Text = "...";
+            this.toolTip.SetToolTip(this.cmdURLopen, "Open URL in browser");
             this.cmdURLopen.UseVisualStyleBackColor = true;
             this.cmdURLopen.Click += new System.EventHandler(this.cmdURLopen_Click);
             // 
@@ -364,10 +356,10 @@
             // 
             this.panStatus.Controls.Add(this.chkReceived);
             this.panStatus.Controls.Add(this.chkMissing);
-            this.panStatus.Location = new System.Drawing.Point(88, 256);
+            this.panStatus.Location = new System.Drawing.Point(88, 286);
             this.panStatus.Name = "panStatus";
             this.panStatus.Size = new System.Drawing.Size(252, 19);
-            this.panStatus.TabIndex = 9;
+            this.panStatus.TabIndex = 10;
             // 
             // chkReceived
             // 
@@ -394,7 +386,7 @@
             // lblCarrier
             // 
             this.lblCarrier.AutoSize = true;
-            this.lblCarrier.Location = new System.Drawing.Point(3, 130);
+            this.lblCarrier.Location = new System.Drawing.Point(3, 156);
             this.lblCarrier.Name = "lblCarrier";
             this.lblCarrier.Size = new System.Drawing.Size(37, 13);
             this.lblCarrier.TabIndex = 15;
@@ -403,7 +395,7 @@
             // lblTracking
             // 
             this.lblTracking.AutoSize = true;
-            this.lblTracking.Location = new System.Drawing.Point(3, 156);
+            this.lblTracking.Location = new System.Drawing.Point(3, 182);
             this.lblTracking.Name = "lblTracking";
             this.lblTracking.Size = new System.Drawing.Size(67, 13);
             this.lblTracking.TabIndex = 16;
@@ -412,19 +404,19 @@
             // cmbCarrier
             // 
             this.cmbCarrier.FormattingEnabled = true;
-            this.cmbCarrier.Location = new System.Drawing.Point(88, 133);
+            this.cmbCarrier.Location = new System.Drawing.Point(88, 159);
             this.cmbCarrier.Name = "cmbCarrier";
             this.cmbCarrier.Size = new System.Drawing.Size(121, 21);
-            this.cmbCarrier.TabIndex = 6;
+            this.cmbCarrier.TabIndex = 7;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.cmdTrack);
             this.panel1.Controls.Add(this.txtTracking);
-            this.panel1.Location = new System.Drawing.Point(88, 159);
+            this.panel1.Location = new System.Drawing.Point(88, 185);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(252, 20);
-            this.panel1.TabIndex = 7;
+            this.panel1.TabIndex = 8;
             // 
             // cmdTrack
             // 
@@ -435,6 +427,7 @@
             this.cmdTrack.Size = new System.Drawing.Size(30, 20);
             this.cmdTrack.TabIndex = 1;
             this.cmdTrack.Text = "...";
+            this.toolTip.SetToolTip(this.cmdTrack, "Open tracking site in browser");
             this.cmdTrack.UseVisualStyleBackColor = true;
             this.cmdTrack.Click += new System.EventHandler(this.cmdTrack_Click);
             // 
@@ -449,10 +442,10 @@
             // 
             this.panel2.Controls.Add(this.cmdNew);
             this.panel2.Controls.Add(this.cmdSave);
-            this.panel2.Location = new System.Drawing.Point(88, 282);
+            this.panel2.Location = new System.Drawing.Point(88, 312);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(252, 24);
-            this.panel2.TabIndex = 10;
+            this.panel2.TabIndex = 11;
             // 
             // cmdNew
             // 
@@ -467,6 +460,40 @@
             this.toolTip.SetToolTip(this.cmdNew, "Add new shipment");
             this.cmdNew.UseVisualStyleBackColor = true;
             this.cmdNew.Click += new System.EventHandler(this.cmdSave_Click);
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(3, 52);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(30, 13);
+            this.lblDate.TabIndex = 6;
+            this.lblDate.Text = "Date";
+            // 
+            // dateSent
+            // 
+            this.dateSent.Location = new System.Drawing.Point(88, 55);
+            this.dateSent.Name = "dateSent";
+            this.dateSent.Size = new System.Drawing.Size(138, 20);
+            this.dateSent.TabIndex = 3;
+            // 
+            // lblCategory
+            // 
+            this.lblCategory.AutoSize = true;
+            this.lblCategory.Location = new System.Drawing.Point(3, 78);
+            this.lblCategory.Name = "lblCategory";
+            this.lblCategory.Size = new System.Drawing.Size(49, 13);
+            this.lblCategory.TabIndex = 17;
+            this.lblCategory.Text = "Category";
+            // 
+            // cmbCategory
+            // 
+            this.cmbCategory.FormattingEnabled = true;
+            this.cmbCategory.Location = new System.Drawing.Point(88, 81);
+            this.cmbCategory.Name = "cmbCategory";
+            this.cmbCategory.Size = new System.Drawing.Size(121, 21);
+            this.cmbCategory.TabIndex = 4;
+            this.toolTip.SetToolTip(this.cmbCategory, "Type new category to create");
             // 
             // numItemCount
             // 
@@ -518,7 +545,7 @@
             this.lstItems.Location = new System.Drawing.Point(6, 45);
             this.lstItems.MultiSelect = false;
             this.lstItems.Name = "lstItems";
-            this.lstItems.Size = new System.Drawing.Size(343, 161);
+            this.lstItems.Size = new System.Drawing.Size(343, 181);
             this.lstItems.TabIndex = 4;
             this.lstItems.UseCompatibleStateImageBehavior = false;
             this.lstItems.View = System.Windows.Forms.View.Details;
@@ -534,17 +561,18 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Item";
-            this.columnHeader1.Width = 250;
+            this.columnHeader1.Width = 275;
             // 
             // statStrip
             // 
             this.statStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.srpFilterOn,
             this.srpSelected,
-            this.srpSearch,
             this.srpLoadSave});
-            this.statStrip.Location = new System.Drawing.Point(0, 590);
+            this.statStrip.Location = new System.Drawing.Point(0, 640);
             this.statStrip.Name = "statStrip";
-            this.statStrip.Size = new System.Drawing.Size(774, 22);
+            this.statStrip.ShowItemToolTips = true;
+            this.statStrip.Size = new System.Drawing.Size(784, 22);
             this.statStrip.TabIndex = 4;
             this.statStrip.Text = "statusStrip1";
             // 
@@ -556,14 +584,6 @@
             this.srpSelected.Size = new System.Drawing.Size(67, 17);
             this.srpSelected.Text = "Selected";
             this.srpSelected.Visible = false;
-            // 
-            // srpSearch
-            // 
-            this.srpSearch.Image = global::ShipmentGeek.Properties.Resources.search;
-            this.srpSearch.Name = "srpSearch";
-            this.srpSearch.Size = new System.Drawing.Size(58, 17);
-            this.srpSearch.Text = "Search";
-            this.srpSearch.Visible = false;
             // 
             // srpLoadSave
             // 
@@ -582,7 +602,7 @@
             this.grpIncoming.Controls.Add(this.lstIncoming);
             this.grpIncoming.Location = new System.Drawing.Point(3, 3);
             this.grpIncoming.Name = "grpIncoming";
-            this.grpIncoming.Size = new System.Drawing.Size(377, 274);
+            this.grpIncoming.Size = new System.Drawing.Size(387, 299);
             this.grpIncoming.TabIndex = 0;
             this.grpIncoming.TabStop = false;
             this.grpIncoming.Text = "Incoming Shipments";
@@ -604,7 +624,7 @@
             this.lstIncoming.Location = new System.Drawing.Point(6, 19);
             this.lstIncoming.MultiSelect = false;
             this.lstIncoming.Name = "lstIncoming";
-            this.lstIncoming.Size = new System.Drawing.Size(365, 247);
+            this.lstIncoming.Size = new System.Drawing.Size(375, 272);
             this.lstIncoming.TabIndex = 0;
             this.lstIncoming.UseCompatibleStateImageBehavior = false;
             this.lstIncoming.View = System.Windows.Forms.View.Details;
@@ -616,12 +636,12 @@
             // clmInID
             // 
             this.clmInID.Text = "ID";
-            this.clmInID.Width = 25;
+            this.clmInID.Width = 35;
             // 
             // clmInName
             // 
             this.clmInName.Text = "Name";
-            this.clmInName.Width = 150;
+            this.clmInName.Width = 160;
             // 
             // clmInDate
             // 
@@ -646,7 +666,7 @@
             this.grpOutgoing.Controls.Add(this.lstOutgoing);
             this.grpOutgoing.Location = new System.Drawing.Point(3, 3);
             this.grpOutgoing.Name = "grpOutgoing";
-            this.grpOutgoing.Size = new System.Drawing.Size(377, 270);
+            this.grpOutgoing.Size = new System.Drawing.Size(390, 295);
             this.grpOutgoing.TabIndex = 1;
             this.grpOutgoing.TabStop = false;
             this.grpOutgoing.Text = "Outgoing Shipments";
@@ -668,7 +688,7 @@
             this.lstOutgoing.Location = new System.Drawing.Point(6, 19);
             this.lstOutgoing.MultiSelect = false;
             this.lstOutgoing.Name = "lstOutgoing";
-            this.lstOutgoing.Size = new System.Drawing.Size(365, 245);
+            this.lstOutgoing.Size = new System.Drawing.Size(378, 270);
             this.lstOutgoing.TabIndex = 0;
             this.lstOutgoing.UseCompatibleStateImageBehavior = false;
             this.lstOutgoing.View = System.Windows.Forms.View.Details;
@@ -680,12 +700,12 @@
             // clmOutID
             // 
             this.clmOutID.Text = "ID";
-            this.clmOutID.Width = 25;
+            this.clmOutID.Width = 35;
             // 
             // clmOutName
             // 
             this.clmOutName.Text = "Name";
-            this.clmOutName.Width = 150;
+            this.clmOutName.Width = 160;
             // 
             // clmOutDate
             // 
@@ -719,7 +739,7 @@
             this.grpItems.Enabled = false;
             this.grpItems.Location = new System.Drawing.Point(3, 3);
             this.grpItems.Name = "grpItems";
-            this.grpItems.Size = new System.Drawing.Size(355, 212);
+            this.grpItems.Size = new System.Drawing.Size(355, 232);
             this.grpItems.TabIndex = 1;
             this.grpItems.TabStop = false;
             this.grpItems.Text = "Shipment Items";
@@ -753,29 +773,29 @@
             // 
             this.splitShipments.Panel2.Controls.Add(this.grpOutgoing);
             this.splitShipments.Panel2MinSize = 100;
-            this.splitShipments.Size = new System.Drawing.Size(383, 560);
-            this.splitShipments.SplitterDistance = 280;
+            this.splitShipments.Size = new System.Drawing.Size(393, 610);
+            this.splitShipments.SplitterDistance = 305;
             this.splitShipments.TabIndex = 0;
             // 
             // splitDetails
             // 
             this.splitDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitDetails.Location = new System.Drawing.Point(401, 27);
+            this.splitDetails.Location = new System.Drawing.Point(411, 27);
             this.splitDetails.Name = "splitDetails";
             this.splitDetails.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitDetails.Panel1
             // 
             this.splitDetails.Panel1.Controls.Add(this.grpDetails);
-            this.splitDetails.Panel1MinSize = 293;
+            this.splitDetails.Panel1MinSize = 325;
             // 
             // splitDetails.Panel2
             // 
             this.splitDetails.Panel2.Controls.Add(this.grpItems);
             this.splitDetails.Panel2MinSize = 125;
-            this.splitDetails.Size = new System.Drawing.Size(361, 560);
-            this.splitDetails.SplitterDistance = 338;
+            this.splitDetails.Size = new System.Drawing.Size(361, 610);
+            this.splitDetails.SplitterDistance = 368;
             this.splitDetails.TabIndex = 1;
             // 
             // mnuStrip
@@ -786,7 +806,7 @@
             this.mnuHelp});
             this.mnuStrip.Location = new System.Drawing.Point(0, 0);
             this.mnuStrip.Name = "mnuStrip";
-            this.mnuStrip.Size = new System.Drawing.Size(774, 24);
+            this.mnuStrip.Size = new System.Drawing.Size(784, 24);
             this.mnuStrip.TabIndex = 6;
             this.mnuStrip.Text = "menuStrip1";
             // 
@@ -847,12 +867,15 @@
             // 
             this.mnuShipment.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuShipmentSearch,
+            this.toolStripSeparator4,
+            this.mnuCategory,
             this.toolStripSeparator3,
             this.mnuClearFilter,
             this.mnuShowAllShipments});
             this.mnuShipment.Name = "mnuShipment";
             this.mnuShipment.Size = new System.Drawing.Size(70, 20);
             this.mnuShipment.Text = "&Shipment";
+            this.mnuShipment.Click += new System.EventHandler(this.mnuShipment_Click);
             // 
             // mnuShipmentSearch
             // 
@@ -862,6 +885,18 @@
             this.mnuShipmentSearch.Size = new System.Drawing.Size(218, 22);
             this.mnuShipmentSearch.Text = "Find";
             this.mnuShipmentSearch.Click += new System.EventHandler(this.mnuShipmentSearch_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(215, 6);
+            // 
+            // mnuCategory
+            // 
+            this.mnuCategory.Image = global::ShipmentGeek.Properties.Resources.category;
+            this.mnuCategory.Name = "mnuCategory";
+            this.mnuCategory.Size = new System.Drawing.Size(218, 22);
+            this.mnuCategory.Text = "Category";
             // 
             // toolStripSeparator3
             // 
@@ -938,11 +973,19 @@
             // 
             this.saveFileDialog.Filter = "Shipment file|*.xml|All files|*.*";
             // 
+            // srpFilterOn
+            // 
+            this.srpFilterOn.Image = global::ShipmentGeek.Properties.Resources.filter;
+            this.srpFilterOn.Margin = new System.Windows.Forms.Padding(0, 3, 5, 2);
+            this.srpFilterOn.Name = "srpFilterOn";
+            this.srpFilterOn.Size = new System.Drawing.Size(16, 17);
+            this.srpFilterOn.Visible = false;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 612);
+            this.ClientSize = new System.Drawing.Size(784, 662);
             this.Controls.Add(this.splitDetails);
             this.Controls.Add(this.splitShipments);
             this.Controls.Add(this.statStrip);
@@ -1048,13 +1091,10 @@
         private System.Windows.Forms.Button cmdItemAdd;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.ToolStripStatusLabel srpLoadSave;
-        private System.Windows.Forms.ToolStripStatusLabel srpSearch;
-        private System.Windows.Forms.MenuStrip mnuStrip;
         private System.Windows.Forms.ToolStripMenuItem mnuFile;
         private System.Windows.Forms.ToolStripMenuItem mnuHelp;
         private System.Windows.Forms.ToolStripMenuItem mnuExit;
         private System.Windows.Forms.ToolStripMenuItem mnuAbout;
-        private System.Windows.Forms.ToolStripMenuItem mnuShipment;
         private System.Windows.Forms.ToolStripMenuItem mnuShipmentSearch;
         private System.Windows.Forms.ToolStripMenuItem mnuOpenShipments;
         private System.Windows.Forms.ToolStripMenuItem mnuSaveShipments;
@@ -1069,6 +1109,13 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem mnuShowAllShipments;
         private System.Windows.Forms.ToolStripMenuItem mnuClearFilter;
+        private System.Windows.Forms.Label lblCategory;
+        private System.Windows.Forms.ComboBox cmbCategory;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem mnuShipment;
+        internal System.Windows.Forms.ToolStripMenuItem mnuCategory;
+        private System.Windows.Forms.MenuStrip mnuStrip;
+        private System.Windows.Forms.ToolStripStatusLabel srpFilterOn;
 
     }
 }

@@ -2,6 +2,10 @@
 
 ### Change log
 
+#### v.1.4.0
+* Added shipment category
+* Improved shipment filtering
+
 #### v.1.3.0
 * Show dialog box when removing shipment and shipment item.
 * Added search for shipments.

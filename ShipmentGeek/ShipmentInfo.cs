@@ -15,6 +15,7 @@ namespace ShipmentGeek
         public bool Outgoing { set; get; }
         public string Name { set; get; }
         public DateTime Date { set; get; }
+        public string Category { set; get; }
         public string Value { set; get; }
         public string URL { set; get; }
         public string Carrier { set; get; }

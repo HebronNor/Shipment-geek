@@ -36,5 +36,19 @@ namespace ShipmentGeek
             prompt.ShowDialog();
             return strReturn;
         }
+
+        public static void AddScriptMenues(string category)
+        {
+            ToolStripMenuItem newItem = new ToolStripMenuItem(category);
+            Program.MainForm.mnuCategory.DropDownItems.Add(newItem);
+            newItem.Click += (sender, eventArgs) =>
+            {
+                foreach (ToolStripMenuItem item in Program.MainForm.mnuCategory.DropDownItems)
+                    if (item != sender) item.Checked = false;
+
+                newItem.Checked = true;
+                Program.MainForm.PopulateLists(FilterType.Category, newItem.Text);
+            };
+        }
     }
 }
