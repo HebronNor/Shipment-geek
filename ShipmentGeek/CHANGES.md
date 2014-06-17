@@ -5,6 +5,7 @@
 #### v.1.4.0
 * Added shipment category
 * Improved shipment filtering
+* Able to copy shipments to clipboard
 
 #### v.1.3.0
 * Show dialog box when removing shipment and shipment item.

@@ -147,6 +147,7 @@
     <Content Include="ExceptionReporter.WinForms.xml">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Resources\clipboard.png" />
     <None Include="Resources\filter.png" />
     <None Include="Resources\category.png" />
     <None Include="Resources\yes.png" />

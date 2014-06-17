@@ -70,6 +70,7 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statStrip = new System.Windows.Forms.StatusStrip();
+            this.srpFilterOn = new System.Windows.Forms.ToolStripStatusLabel();
             this.srpSelected = new System.Windows.Forms.ToolStripStatusLabel();
             this.srpLoadSave = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpIncoming = new System.Windows.Forms.GroupBox();
@@ -101,6 +102,7 @@
             this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuShipment = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuShipmentSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCopyToClipboard = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -113,7 +115,6 @@
             this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.srpFilterOn = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpDetails.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panType.SuspendLayout();
@@ -576,6 +577,14 @@
             this.statStrip.TabIndex = 4;
             this.statStrip.Text = "statusStrip1";
             // 
+            // srpFilterOn
+            // 
+            this.srpFilterOn.Image = global::ShipmentGeek.Properties.Resources.filter;
+            this.srpFilterOn.Margin = new System.Windows.Forms.Padding(0, 3, 5, 2);
+            this.srpFilterOn.Name = "srpFilterOn";
+            this.srpFilterOn.Size = new System.Drawing.Size(16, 17);
+            this.srpFilterOn.Visible = false;
+            // 
             // srpSelected
             // 
             this.srpSelected.Image = global::ShipmentGeek.Properties.Resources.selected;
@@ -867,6 +876,7 @@
             // 
             this.mnuShipment.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuShipmentSearch,
+            this.mnuCopyToClipboard,
             this.toolStripSeparator4,
             this.mnuCategory,
             this.toolStripSeparator3,
@@ -885,6 +895,14 @@
             this.mnuShipmentSearch.Size = new System.Drawing.Size(218, 22);
             this.mnuShipmentSearch.Text = "Find";
             this.mnuShipmentSearch.Click += new System.EventHandler(this.mnuShipmentSearch_Click);
+            // 
+            // mnuCopyToClipboard
+            // 
+            this.mnuCopyToClipboard.Image = global::ShipmentGeek.Properties.Resources.clipboard;
+            this.mnuCopyToClipboard.Name = "mnuCopyToClipboard";
+            this.mnuCopyToClipboard.Size = new System.Drawing.Size(218, 22);
+            this.mnuCopyToClipboard.Text = "Copy to clipboard";
+            this.mnuCopyToClipboard.Click += new System.EventHandler(this.mnuCopyToClipboard_Click);
             // 
             // toolStripSeparator4
             // 
@@ -972,14 +990,6 @@
             // saveFileDialog
             // 
             this.saveFileDialog.Filter = "Shipment file|*.xml|All files|*.*";
-            // 
-            // srpFilterOn
-            // 
-            this.srpFilterOn.Image = global::ShipmentGeek.Properties.Resources.filter;
-            this.srpFilterOn.Margin = new System.Windows.Forms.Padding(0, 3, 5, 2);
-            this.srpFilterOn.Name = "srpFilterOn";
-            this.srpFilterOn.Size = new System.Drawing.Size(16, 17);
-            this.srpFilterOn.Visible = false;
             // 
             // frmMain
             // 
@@ -1116,6 +1126,7 @@
         internal System.Windows.Forms.ToolStripMenuItem mnuCategory;
         private System.Windows.Forms.MenuStrip mnuStrip;
         private System.Windows.Forms.ToolStripStatusLabel srpFilterOn;
+        private System.Windows.Forms.ToolStripMenuItem mnuCopyToClipboard;
 
     }
 }

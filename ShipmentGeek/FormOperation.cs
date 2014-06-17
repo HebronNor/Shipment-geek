@@ -50,5 +50,46 @@ namespace ShipmentGeek
                 Program.MainForm.PopulateLists(FilterType.Category, newItem.Text);
             };
         }
+
+        public static void CopyToClipboard()
+        {
+            try
+            {
+                if (ShipmentInfo.List.Count > 0)
+                {
+                    StringBuilder clipboard = new StringBuilder();
+
+                    foreach (ShipmentInfo item in ShipmentInfo.List)
+                    {
+                        string stringLine = string.Empty;
+
+                        foreach (ShipmentItem si in item.Items)
+                        {
+                            if (!string.IsNullOrEmpty(stringLine)) stringLine += " | ";
+                            stringLine += string.Format("{0}: {1}", si.Count, si.Text);
+                        }
+
+                        string type = string.Empty;
+                        if (item.Incomming) type = "Incoming";
+                        else if (item.Outgoing) type = "Outgoing";
+
+                        string status = "Open";
+                        if (item.Received) status = "Received";
+                        else if (item.Missing) status = "Missing";
+
+                        clipboard.AppendLine(string.Format("{0}: {1} [{2}] {3} ({4})", type, item.Date.ToShortDateString(), status, item.Name, stringLine));
+
+                    }
+
+                    Clipboard.SetText(clipboard.ToString());
+                }
+
+                //StatusHandler.SetStatusToolStrip(Program.MainForm, "Computer list copied to clipboard");
+            }
+            catch (Exception exp)
+            {
+                MsgManager.Show(exp.Message, "Clipboard", MessageBoxIcon.Warning);
+            }
+        }
     }
 }

@@ -662,5 +662,10 @@ namespace ShipmentGeek
             mnuCategory.Enabled = Categories.Count > 0;
         }
 
+        private void mnuCopyToClipboard_Click(object sender, EventArgs e)
+        {
+            FormOperation.CopyToClipboard();
+        }
+
     }
 }
