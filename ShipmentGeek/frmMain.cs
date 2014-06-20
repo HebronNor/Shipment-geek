@@ -662,9 +662,17 @@ namespace ShipmentGeek
             mnuCategory.Enabled = Categories.Count > 0;
         }
 
-        private void mnuCopyToClipboard_Click(object sender, EventArgs e)
+        private void mnuPrint_Click(object sender, EventArgs e)
         {
-            FormOperation.CopyToClipboard();
+            try
+            {
+                PrintHandler print = new PrintHandler();
+                print.PrintShipments(ShipmentInfo.ToString(true));
+            }
+            catch (Exception exp)
+            {
+                MsgManager.Show(exp.Message, "Print error", MessageBoxIcon.Error);
+            }
         }
 
     }

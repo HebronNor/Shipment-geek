@@ -61,6 +61,38 @@ namespace ShipmentGeek
 
         [XmlIgnore]
         public static Comparison<ShipmentInfo> ItemComparison = delegate(ShipmentInfo s1, ShipmentInfo s2) { return s2.Items.Sum(f => f.Count).CompareTo(s1.Items.Sum(f => f.Count)); };
+
+        public static string ToString(bool items)
+        {
+            if (ShipmentInfo.List.Count > 0)
+            {
+                StringBuilder clipboard = new StringBuilder();
+
+                foreach (ShipmentInfo item in ShipmentInfo.List)
+                {
+                    string type = string.Empty;
+                    if (item.Incomming) type = "Incoming";
+                    else if (item.Outgoing) type = "Outgoing";
+
+                    string status = "Open";
+                    if (item.Received) status = "Received";
+                    else if (item.Missing) status = "Missing";
+
+                    clipboard.AppendLine(string.Format("{0}: {1} [{2}] {3}", type, item.Date.ToShortDateString(), status, item.Name));
+
+                    if (items)
+                    {
+                        foreach (ShipmentItem si in item.Items)
+                            clipboard.AppendLine(string.Format("- {0} : {1}", si.Count, si.Text));
+
+                        clipboard.AppendLine();
+                    }
+                }
+                return clipboard.ToString();
+            }
+            else
+                return null;
+        }
     }
 
     public class ShipmentItem
