@@ -121,7 +121,6 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="CHANGES.md" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -132,7 +131,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="README.md" />
     <None Include="ShipmentGeek_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -193,14 +191,12 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>copy "$(ProjectDir)README.md" $(SolutionDir)
-copy "$(ProjectDir)CHANGES.md" $(SolutionDir)
-
-mkdir $(TargetDir)Release
+    <PostBuildEvent>mkdir $(TargetDir)Release
 copy $(TargetDir)ExceptionReporter.WinForms.dll $(TargetDir)Release
 copy $(TargetPath) $(TargetDir)Release
-copy $(ProjectDir)README.md $(TargetDir)Release
-copy $(ProjectDir)CHANGES.md $(TargetDir)Release</PostBuildEvent>
+copy $(SolutionDir)README.md $(TargetDir)Release
+copy $(SolutionDir)CHANGES.md $(TargetDir)Release
+copy $(SolutionDir)LICENSE $(TargetDir)Release</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
