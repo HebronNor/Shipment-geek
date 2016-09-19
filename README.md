@@ -5,7 +5,7 @@ Latest **release, with binary files**, can be found [here](https://github.com/He
 Shipment geek is a super light database manager for keeping track of incoming and outgoing shipments. Date, comment, items and whether the shipment has been received or lost can be stored, giving a nice overview of all shipments in transit.
 
 ## Screenshots
-<img src="https://cdn.uctrl.net/github/shipmentgeek/shipmentgeek_screen4.png" width="450">
+<img src="https://s3-eu-west-1.amazonaws.com/thomasjsn/public/github/shipmentgeek/shipmentgeek_screen4.png" width="450">
 
 ## Installation
 No installation is required; simply unpack the release binary files (`ShipmentGeek_vX.X.X.zip`) to a folder of your choosing.
